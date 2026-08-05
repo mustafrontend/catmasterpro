@@ -1,0 +1,37 @@
+workflows:
+  ios-release:
+    name: Cat Master PRO iOS App Store Release
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: catmasterpro
+    environment:
+      groups:
+        - appstore_credentials
+      node: latest
+      xcode: latest
+    scripts:
+      - name: Install Node.js dependencies
+        script: |
+          npm install
+      - name: Build Web Assets & Capacitor Sync
+        script: |
+          npm run build
+          npx cap sync ios
+      - name: Set up code signing
+        script: |
+          keychain initialize
+          app-store-connect fetch-signing-files "com.catmaster.pro.app" --type IOS_APP_STORE --certificate-key @env:CERTIFICATE_PRIVATE_KEY --create || true
+          keychain add-certificates || true
+          xcode-project use-profiles || true
+      - name: Build iOS Xcode App
+        script: |
+          cd ios/App
+          xcodebuild -project App.xcodeproj -scheme App -archivePath $HOME/build/App.xcarchive archive CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO
+    artifacts:
+      - $HOME/build/*.xcarchive
+      - $HOME/build/**/*.ipa
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true

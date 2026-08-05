@@ -1,0 +1,25 @@
+{
+  "appId": "com.catmaster.pro.app",
+  "appName": "Cat Master PRO",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https",
+    "iosScheme": "https"
+  },
+  "plugins": {
+    "LocalNotifications": {
+      "smallIcon": "ic_stat_icon_config_sample",
+      "iconColor": "#97480D",
+      "sound": "beep.wav"
+    },
+    "SplashScreen": {
+      "launchShowDuration": 2000,
+      "launchAutoHide": true,
+      "backgroundColor": "#FBF9F7",
+      "androidSplashResourceName": "splash",
+      "iosSpinnerStyle": "small",
+      "spinnerColor": "#97480D"
+    }
+  }
+}
