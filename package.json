@@ -19,7 +19,7 @@
     "@capacitor/core": "^6.1.2",
     "@capacitor/ios": "^6.1.2",
     "@capacitor/local-notifications": "^6.0.1",
-    "@revenuecat/purchases-capacitor": "^13.3.0",
+    "@revenuecat/purchases-capacitor": "^10.0.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.17",
     "i18next": "^23.16.5",
