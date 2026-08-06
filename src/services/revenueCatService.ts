@@ -38,11 +38,27 @@ export const checkIsProUser = async (): Promise<boolean> => {
 export const purchaseProPackage = async (packageId: 'annual' | 'monthly' | 'lifetime'): Promise<boolean> => {
   try {
     const offerings = await Purchases.getOfferings();
-    if (offerings.current !== null && offerings.current.availablePackages.length > 0) {
-      const targetPackage = offerings.current.availablePackages.find(
-        (pkg) => pkg.identifier.includes(packageId) || pkg.packageType.toLowerCase().includes(packageId)
-      ) || offerings.current.availablePackages[0];
+    console.log('[RevenueCat] Fetched offerings:', offerings);
 
+    // Collect all packages from current offering + all available offerings
+    let allAvailablePackages = offerings.current?.availablePackages || [];
+    if (offerings.all) {
+      Object.values(offerings.all).forEach((offering) => {
+        if (offering && offering.availablePackages) {
+          allAvailablePackages = [...allAvailablePackages, ...offering.availablePackages];
+        }
+      });
+    }
+
+    if (allAvailablePackages.length > 0) {
+      const targetPackage = allAvailablePackages.find(
+        (pkg) =>
+          pkg.identifier.includes(packageId) ||
+          (pkg.product && pkg.product.identifier.includes(packageId)) ||
+          pkg.packageType.toLowerCase().includes(packageId)
+      ) || allAvailablePackages[0];
+
+      console.log('[RevenueCat] Purchasing target package:', targetPackage.identifier);
       const { customerInfo } = await Purchases.purchasePackage({ aPackage: targetPackage });
       return customerInfo.entitlements.active[REVENUECAT_ENTITLEMENT_ID] !== undefined;
     }
