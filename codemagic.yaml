@@ -22,7 +22,7 @@ workflows:
       - name: Build iOS Xcode App
         script: |
           cd ios/App
-          xcodebuild -project App.xcodeproj -scheme App -archivePath $HOME/build/App.xcarchive archive -allowProvisioningUpdates DEVELOPMENT_TEAM="D468YQVPP6"
+          xcodebuild -project App.xcodeproj -scheme App -archivePath $HOME/build/App.xcarchive archive
     artifacts:
       - $HOME/build/*.xcarchive
     publishing:
