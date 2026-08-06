@@ -33,8 +33,8 @@ import { LessonDetailView } from './features/training/LessonDetailView';
 import { SessionTimerView } from './features/timer/SessionTimerView';
 import { PaywallModal } from './features/paywall/PaywallModal';
 import { initializeRevenueCat } from './services/revenueCatService';
+import { requestAudioAndNotificationPermissions, playKittenWelcomeMeow } from './services/soundService';
 import { LESSONS_DATA, Lesson } from './features/training/lessonsData';
-import { Cat } from './types/cat';
 
 export type AppPage = 'home' | 'lessons' | 'lesson-detail' | 'behavior' | 'profile' | 'mood' | 'calming';
 
@@ -47,62 +47,30 @@ export const App: React.FC = () => {
   const [isTimerOpen, setIsTimerOpen] = useState(false);
   const [isPaywallOpen, setIsPaywallOpen] = useState(false);
 
-  // Play cute kitten meow 2 times on app opening
-  const playKittenWelcomeMeowDouble = () => {
-    try {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-      if (!AudioCtx) return;
-      const ctx = new AudioCtx();
-
-      const playSingleKittenMeow = (startTime: number) => {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-
-        osc.type = 'sine';
-        // Cute high-pitched kitten frequency (650Hz -> 1250Hz -> 500Hz)
-        osc.frequency.setValueAtTime(650, startTime);
-        osc.frequency.exponentialRampToValueAtTime(1250, startTime + 0.12);
-        osc.frequency.exponentialRampToValueAtTime(500, startTime + 0.28);
-
-        gain.gain.setValueAtTime(0.25, startTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, startTime + 0.28);
-
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-
-        osc.start(startTime);
-        osc.stop(startTime + 0.28);
-      };
-
-      // 2 meows: 1st at 0s, 2nd at 0.35s
-      const now = ctx.currentTime;
-      playSingleKittenMeow(now);
-      playSingleKittenMeow(now + 0.35);
-    } catch {
-      // Audio fallback
-    }
-  };
-
-  // Sync VPS backend, lessons, and trigger meow on launch
+  // Sync VPS backend, lessons, initialize RevenueCat, request sound permissions, and trigger meow on launch
   useEffect(() => {
+    initializeRevenueCat();
     fetchLessonsFromApi();
     syncWithCloudBackend();
 
-    // Trigger welcome meow
-    const timer = setTimeout(() => {
-      playKittenWelcomeMeowDouble();
-    }, 600);
+    // Request permissions & unlock iOS Audio Context
+    requestAudioAndNotificationPermissions().then(() => {
+      playKittenWelcomeMeow();
+    });
 
-    // Fallback on first click for strict browser autoplay policies
+    // Fallback on first touch/click for iOS autoplay policy
     const handleFirstInteraction = () => {
-      playKittenWelcomeMeowDouble();
+      requestAudioAndNotificationPermissions();
+      playKittenWelcomeMeow();
       window.removeEventListener('click', handleFirstInteraction);
+      window.removeEventListener('touchstart', handleFirstInteraction);
     };
     window.addEventListener('click', handleFirstInteraction, { once: true });
+    window.addEventListener('touchstart', handleFirstInteraction, { once: true });
 
     return () => {
-      clearTimeout(timer);
       window.removeEventListener('click', handleFirstInteraction);
+      window.removeEventListener('touchstart', handleFirstInteraction);
     };
   }, []);
 
