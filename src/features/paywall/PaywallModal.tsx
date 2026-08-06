@@ -24,7 +24,7 @@ interface PaywallModalProps {
 export const PaywallModal: React.FC<PaywallModalProps> = ({ isOpen, onClose }) => {
   const { t } = useTranslation();
   const { setPremium, restorePurchases } = useCatStore();
-  const [selectedPlan, setSelectedPlan] = useState<'annual' | 'monthly'>('annual');
+  const [selectedPlan, setSelectedPlan] = useState<'annual' | 'lifetime' | 'monthly'>('annual');
   const [isLoading, setIsLoading] = useState(false);
   const [restoreMessage, setRestoreMessage] = useState<string | null>(null);
 
@@ -154,7 +154,7 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({ isOpen, onClose }) =
 
               {/* Pricing Cards Selection */}
               <div className="space-y-3 pt-1">
-                {/* Annual Plan Card */}
+                {/* 1. Annual Plan Card (Recommended %70 OFF) */}
                 <div
                   onClick={() => setSelectedPlan('annual')}
                   className={`relative cursor-pointer rounded-2xl p-4 transition-all border-2 ${
@@ -163,23 +163,54 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({ isOpen, onClose }) =
                       : 'bg-white border-slate-200/80 hover:border-slate-300'
                   }`}
                 >
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10 bg-[#97480d] text-white font-bold text-[10px] uppercase tracking-wider px-3 py-0.5 rounded-full shadow-xs">
-                    {t('paywall.annualSavings')}
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10 bg-gradient-to-r from-amber-600 to-[#97480d] text-white font-black text-[10px] uppercase tracking-wider px-3 py-0.5 rounded-full shadow-xs flex items-center gap-1">
+                    <span>🔥 %70 İNDİRİM</span>
+                    <span>•</span>
+                    <span>3 GÜN ÜCRETSİZ</span>
                   </div>
 
                   <div className="flex justify-between items-center relative z-10">
                     <div>
-                      <span className="font-extrabold text-slate-900 text-sm block">{t('paywall.annualPlan')}</span>
-                      <span className="text-xs font-bold text-emerald-600 block mt-0.5">{t('paywall.annualTrial')}</span>
+                      <span className="font-extrabold text-slate-900 text-sm block">Yıllık PRO Erişim</span>
+                      <span className="text-xs font-bold text-emerald-600 block mt-0.5">3 Gün Ücretsiz Dene & Sonra $19.99</span>
                     </div>
                     <div className="text-right">
-                      <div className="font-black text-xl text-[#97480d]">$49.99</div>
-                      <div className="text-[10px] font-semibold text-slate-400">/yıl ($4.16/ay)</div>
+                      <div className="flex items-center gap-1.5 justify-end">
+                        <span className="text-xs text-slate-400 line-through font-semibold">$60.00</span>
+                        <span className="font-black text-xl text-[#97480d]">$19.99</span>
+                      </div>
+                      <div className="text-[10px] font-semibold text-slate-400">/yıl ($1.66/ay)</div>
                     </div>
                   </div>
                 </div>
 
-                {/* Monthly Plan Card */}
+                {/* 2. Lifetime Plan Card */}
+                <div
+                  onClick={() => setSelectedPlan('lifetime')}
+                  className={`relative cursor-pointer rounded-2xl p-4 transition-all border-2 ${
+                    selectedPlan === 'lifetime'
+                      ? 'bg-white border-[#97480d] shadow-md ring-2 ring-amber-200'
+                      : 'bg-white border-slate-200/80 hover:border-slate-300'
+                  }`}
+                >
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <div className="flex items-center gap-1.5">
+                        <span className="font-extrabold text-slate-900 text-sm">Ömür Boyu Sınırsız</span>
+                        <span className="px-2 py-0.5 rounded-md bg-amber-100 text-[#97480d] text-[9px] font-black uppercase">
+                          Sınırsız
+                        </span>
+                      </div>
+                      <span className="text-xs font-medium text-slate-500 block mt-0.5">Tek Seferlik Ödeme (Sonsuz Erişim)</span>
+                    </div>
+                    <div className="text-right">
+                      <div className="font-black text-xl text-slate-900">$39.99</div>
+                      <div className="text-[10px] font-semibold text-slate-400">tek seferlik</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. Monthly Plan Card */}
                 <div
                   onClick={() => setSelectedPlan('monthly')}
                   className={`cursor-pointer rounded-2xl p-4 transition-all border-2 ${
@@ -189,9 +220,9 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({ isOpen, onClose }) =
                   }`}
                 >
                   <div className="flex justify-between items-center">
-                    <span className="font-extrabold text-slate-900 text-sm">{t('paywall.monthlyPlan')}</span>
+                    <span className="font-extrabold text-slate-900 text-sm">Aylık PRO Plan</span>
                     <div className="text-right">
-                      <div className="font-black text-xl text-slate-900">$9.99</div>
+                      <div className="font-black text-xl text-slate-900">$4.99</div>
                       <div className="text-[10px] font-semibold text-slate-400">/ay</div>
                     </div>
                   </div>

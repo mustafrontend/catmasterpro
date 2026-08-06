@@ -35,7 +35,7 @@ export const checkIsProUser = async (): Promise<boolean> => {
   }
 };
 
-export const purchaseProPackage = async (packageId: 'annual' | 'monthly'): Promise<boolean> => {
+export const purchaseProPackage = async (packageId: 'annual' | 'monthly' | 'lifetime'): Promise<boolean> => {
   try {
     const offerings = await Purchases.getOfferings();
     if (offerings.current !== null && offerings.current.availablePackages.length > 0) {
