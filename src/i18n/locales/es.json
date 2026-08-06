@@ -30,14 +30,14 @@
     "viewAll": "Ver Todo →",
     "lastWeight": "Último Peso",
     "upcomingVet": "Próxima Cita Vet",
-    "proBannerTitle": "Desbloquea 7 Lecciones PRO y Guías de Agresividad",
-    "proBannerSubtitle": "Acceso ilimitado por $49.99/año (58% DTO) o suscripción de $9.99/mes.",
+    "proBannerTitle": "Desbloquea 30 Lecciones PRO y Guías de Agresividad",
+    "proBannerSubtitle": "Acceso ilimitado por $19.99/año (70% DTO) o acceso de por vida por $39.99.",
     "startFreeTrial": "Iniciar Prueba Gratuita"
   },
   "lessons": {
     "title": "Centro de Entrenamiento",
     "subtitle": "Entrenamiento felino paso a paso con refuerzo positivo.",
-    "proBannerTitle": "Pasa a PRO para 7 Lecciones y Guías de Agresividad",
+    "proBannerTitle": "Pasa a PRO para 30 Lecciones y Guías de Agresividad",
     "proBannerSub": "Desbloquea todo el potencial de tu gato.",
     "upgradeBtn": "MEJORAR AHORA",
     "free": "GRATIS",
@@ -78,18 +78,22 @@
     "remindBtn": "Recordar"
   },
   "paywall": {
-    "title": "Desbloquea el Potencial de tu Gato con Cat Master PRO",
-    "subtitle": "Acceso instantáneo a entrenamiento ilimitado y herramientas de salud.",
-    "annualPlan": "Plan Anual",
-    "annualSavings": "Más Popular • 58% DTO",
-    "annualTrial": "Prueba Gratis de 3 Días",
-    "monthlyPlan": "Plan Mensual",
-    "startTrialBtn": "Iniciar Prueba Gratis de 3 Días",
-    "subscribeBtn": "Suscribirse y Obtener Acceso Total",
+    "title": "Desbloquea las 30 Lecciones y Guías PRO",
+    "subtitle": "Acceso instantáneo a entrenamiento ilimitado, guías de agresividad y análisis veterinario.",
+    "annualPlan": "Acceso Anual PRO",
+    "annualSavings": "🔥 70% DTO • 3 DÍAS GRATIS",
+    "annualTrial": "Prueba Gratis de 3 Días, luego $19.99/año",
+    "lifetimePlan": "Ilimitado de por Vida",
+    "lifetimeBadge": "Ilimitado",
+    "lifetimeSub": "Pago Único (Acceso Eterno)",
+    "monthlyPlan": "Plan Mensual PRO",
+    "startTrialBtn": "Probar 3 Días Gratis y Comprar",
+    "subscribeBtn": "Comprar y Desbloquear PRO",
+    "processing": "Procesando...",
     "restorePurchases": "Restaurar Compras",
     "terms": "Términos de Servicio",
     "privacy": "Política de Privacidad",
-    "disclaimer": "La suscripción se renueva automáticamente. Cancela cuando quieras."
+    "disclaimer": "La suscripción se renueva automáticamente al finalizar la prueba. Cancela en cualquier momento."
   },
   "profile": {
     "title": "Perfil del Gato y Ajustes",
@@ -100,6 +104,6 @@
     "breed": "Raza",
     "age": "Edad",
     "weight": "Peso",
-    "language": "Idioma de la App"
+    "language": "Idioma de la Aplicación"
   }
 }
