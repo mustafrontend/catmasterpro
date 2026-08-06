@@ -32,7 +32,7 @@ export const CatSelectorHeader: React.FC<CatSelectorHeaderProps> = ({
   const activeCat = getActiveCat();
 
   return (
-    <header className="relative z-30 bg-[#fbf9f7]/90 backdrop-blur-md border-b border-slate-200/60 px-4 h-16 flex items-center justify-between shadow-2xs font-sans">
+    <header className="relative z-30 bg-[#fbf9f7]/90 backdrop-blur-md border-b border-slate-200/60 px-4 pt-[max(0.75rem,env(safe-area-inset-top))] pb-3 min-h-[4.25rem] flex items-center justify-between shadow-2xs font-sans">
       {/* 1. Left: Paw Icon (Pets) */}
       <button
         type="button"

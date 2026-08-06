@@ -13,6 +13,8 @@ import {
   Crown,
 } from 'lucide-react';
 import { useCatStore } from '../../store/catStore';
+import { purchaseProPackage, restoreProPurchases as serviceRestorePurchases } from '../../services/revenueCatService';
+import { Capacitor } from '@capacitor/core';
 
 interface PaywallModalProps {
   isOpen: boolean;
@@ -28,11 +30,20 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({ isOpen, onClose }) =
 
   const handleSubscribe = async () => {
     setIsLoading(true);
-    // Simulate RevenueCat purchasing flow
-    await new Promise((res) => setTimeout(res, 1200));
-    setPremium(true);
+    const platform = Capacitor.getPlatform();
+    if (platform === 'ios' || platform === 'android') {
+      const success = await purchaseProPackage(selectedPlan);
+      if (success) {
+        setPremium(true);
+        onClose();
+      }
+    } else {
+      // Web browser sandbox simulation
+      await new Promise((res) => setTimeout(res, 800));
+      setPremium(true);
+      onClose();
+    }
     setIsLoading(false);
-    onClose();
   };
 
   const handleRestore = async () => {
