@@ -1,8 +1,8 @@
 import { Capacitor } from '@capacitor/core';
 import { Purchases, LOG_LEVEL } from '@revenuecat/purchases-capacitor';
 
-// REVENUECAT API KEY FROM REVENUECAT DASHBOARD
-export const REVENUECAT_API_KEY = 'test_zyBIeoJvywAucjIbspgHipfbOWz';
+// REVENUECAT LIVE PRODUCTION API KEY FOR APP STORE
+export const REVENUECAT_API_KEY = 'appl_JYVlJKQALPEgHINrBpUgYismGUU';
 export const REVENUECAT_ENTITLEMENT_ID = 'pro_access';
 
 export const initializeRevenueCat = async (): Promise<boolean> => {
