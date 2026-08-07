@@ -13,8 +13,10 @@ import {
   Sparkles,
   Flame,
   Award,
-  ArrowLeft
+  ArrowLeft,
+  Volume2,
 } from 'lucide-react';
+import { playClickerSound, playCompletionChime, playKittenWelcomeMeow } from '../../services/soundService';
 
 export interface SessionSaveData {
   durationSeconds: number;
@@ -45,57 +47,14 @@ export const SessionTimerView: React.FC<SessionTimerViewProps> = ({
   const [treatCount, setTreatCount] = useState<number>(0);
   const [isFinished, setIsFinished] = useState<boolean>(false);
 
-  // Clicker pulse animation state
-  const [clickerPulse, setClickerPulse] = useState<boolean>(false);
+  // Clicker visual pulse animation state
+  const [clickerRipples, setClickerRipples] = useState<number[]>([]);
 
   // Summary Modal state
   const [rating, setRating] = useState<1 | 2 | 3 | 4 | 5>(5);
   const [notes, setNotes] = useState<string>('');
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Sound synthesis via Web Audio API (Clicker & Chime)
-  const playAudioCue = (type: 'click' | 'finish') => {
-    try {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-      if (!AudioCtx) return;
-      const ctx = new AudioCtx();
-
-      if (type === 'click') {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(1200, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(300, ctx.currentTime + 0.05);
-
-        gain.gain.setValueAtTime(0.3, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.05);
-
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-
-        osc.start();
-        osc.stop(ctx.currentTime + 0.05);
-      } else if (type === 'finish') {
-        // Double Chime for completion
-        const now = ctx.currentTime;
-        [523.25, 659.25, 783.99].forEach((freq, idx) => {
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          osc.type = 'triangle';
-          osc.frequency.value = freq;
-          gain.gain.setValueAtTime(0.2, now + idx * 0.1);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.1 + 0.3);
-          osc.connect(gain);
-          gain.connect(ctx.destination);
-          osc.start(now + idx * 0.1);
-          osc.stop(now + idx * 0.1 + 0.3);
-        });
-      }
-    } catch {
-      // Audio fallback silent
-    }
-  };
 
   // Timer countdown tick
   useEffect(() => {
@@ -105,7 +64,7 @@ export const SessionTimerView: React.FC<SessionTimerViewProps> = ({
       }, 1000);
     } else if (timeLeft === 0 && isRunning) {
       setIsRunning(false);
-      playAudioCue('finish');
+      playCompletionChime();
       setIsFinished(true);
     }
 
@@ -121,24 +80,25 @@ export const SessionTimerView: React.FC<SessionTimerViewProps> = ({
   };
 
   const handleStartPause = () => {
+    playClickerSound();
     setIsRunning((prev) => !prev);
   };
 
   const handleReset = () => {
+    playClickerSound();
     setIsRunning(false);
     setTimeLeft(selectedDuration);
     setTreatCount(0);
   };
 
   const handleTriggerClicker = () => {
-    playAudioCue('click');
-    setClickerPulse(true);
-    setTimeout(() => setClickerPulse(false), 300);
+    playClickerSound();
+    setClickerRipples((prev) => [...prev.slice(-3), Date.now()]);
   };
 
   const handleIncrementTreats = () => {
+    playClickerSound();
     setTreatCount((prev) => prev + 1);
-    playAudioCue('click');
   };
 
   const handleDecrementTreats = () => {
@@ -147,7 +107,7 @@ export const SessionTimerView: React.FC<SessionTimerViewProps> = ({
 
   const handleFinishEarly = () => {
     setIsRunning(false);
-    playAudioCue('finish');
+    playCompletionChime();
     setIsFinished(true);
   };
 
@@ -170,128 +130,135 @@ export const SessionTimerView: React.FC<SessionTimerViewProps> = ({
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
-  // Progress percentage
-  const progressPercent = Math.round(
-    ((selectedDuration - timeLeft) / selectedDuration) * 100
-  );
+  // SVG Circular Gauge calculations
+  const radius = 100;
+  const circumference = 2 * Math.PI * radius;
+  const progressRatio = (selectedDuration - timeLeft) / selectedDuration;
+  const strokeDashoffset = circumference * (1 - progressRatio);
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-800 pb-20 pt-4 px-4 sm:px-6 max-w-2xl mx-auto flex flex-col justify-between">
+    <div className="min-h-screen bg-[#fbf9f7] text-slate-800 pb-16 pt-4 px-4 sm:px-6 max-w-xl mx-auto flex flex-col justify-between font-sans relative overflow-hidden">
+      
+      {/* Clicker Screen Ripple Animations */}
+      {clickerRipples.map((timestamp) => (
+        <motion.div
+          key={timestamp}
+          initial={{ scale: 0.2, opacity: 0.8 }}
+          animate={{ scale: 2.8, opacity: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full border-4 border-amber-400 bg-amber-400/20 pointer-events-none z-20"
+        />
+      ))}
+
       {/* Top Bar */}
       <div>
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-4">
           <button
             onClick={onClose}
-            className="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors font-medium text-xs py-2 px-3 rounded-lg hover:bg-slate-200/50 active:scale-[0.98]"
+            className="flex items-center gap-1.5 text-slate-600 hover:text-slate-900 transition-colors font-bold text-xs py-2 px-3.5 rounded-full bg-slate-200/60 active:scale-95"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Kapat</span>
           </button>
 
-          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-200">
-            <Flame className="w-3.5 h-3.5 text-amber-600" /> Pozitif Pekiştirme
-          </span>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-amber-100/90 text-[#97480d] border border-amber-200">
+            <Flame className="w-3.5 h-3.5 text-orange-500 fill-orange-500" />
+            <span>Pozitif Pekiştirme</span>
+          </div>
         </div>
 
         {/* Skill Title Header */}
-        <div className="text-center mb-6">
-          <span className="text-xs font-bold text-amber-600 uppercase tracking-wider block mb-1">
-            Eğitim Seansı
+        <div className="text-center mb-4">
+          <span className="text-[11px] font-extrabold text-[#97480d] uppercase tracking-wider block mb-1">
+            EĞİTİM SEANSI
           </span>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-serif">
             {skillTitle}
           </h1>
+
+          {/* Duration Preset Selector */}
+          <div className="flex items-center justify-center gap-2 mt-3">
+            {[180, 240, 300].map((sec) => {
+              const label = `${sec / 60} Dk`;
+              const isSelected = selectedDuration === sec;
+              return (
+                <button
+                  key={sec}
+                  disabled={isRunning}
+                  onClick={() => handleSelectPreset(sec)}
+                  className={`px-4 py-1.5 rounded-full text-xs font-black transition-all active:scale-95 ${
+                    isSelected
+                      ? 'bg-slate-900 text-white shadow-md'
+                      : 'bg-white text-slate-600 border border-slate-200 hover:bg-amber-50'
+                  } ${isRunning ? 'opacity-50 cursor-not-allowed' : ''}`}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Duration Preset Selector Buttons */}
-        <div className="flex items-center justify-center gap-2 mb-8">
-          {[
-            { label: '3 Dk', seconds: 180 },
-            { label: '4 Dk', seconds: 240 },
-            { label: '5 Dk', seconds: 300 },
-          ].map((preset) => (
-            <button
-              key={preset.seconds}
-              onClick={() => handleSelectPreset(preset.seconds)}
-              disabled={isRunning}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all active:scale-[0.98] ${
-                selectedDuration === preset.seconds
-                  ? 'bg-slate-900 text-white shadow-sm'
-                  : 'bg-white text-slate-600 border-[0.5px] border-slate-200 hover:bg-slate-100'
-              } ${isRunning ? 'opacity-50 cursor-not-allowed' : ''}`}
-            >
-              {preset.label}
-            </button>
-          ))}
-        </div>
-
-        {/* Big Circular / Kinetic Timer Display */}
-        <div className="relative w-64 h-64 mx-auto mb-8 flex items-center justify-center">
-          {/* SVG Progress Ring */}
-          <svg className="w-full h-full transform -rotate-90">
+        {/* Circular Gauge Timer Display */}
+        <div className="relative my-4 flex items-center justify-center">
+          <svg className="w-64 h-64 sm:w-72 sm:h-72 transform -rotate-90">
+            {/* Track Circle */}
             <circle
-              cx="128"
-              cy="128"
-              r="110"
-              className="stroke-slate-200"
-              strokeWidth="10"
+              cx="50%"
+              cy="50%"
+              r={radius}
+              className="stroke-slate-200/80"
+              strokeWidth="12"
               fill="transparent"
             />
+            {/* Animated Progress Circle */}
             <motion.circle
-              cx="128"
-              cy="128"
-              r="110"
-              className="stroke-amber-500"
-              strokeWidth="10"
-              strokeDasharray="691"
-              strokeDashoffset={691 - (691 * progressPercent) / 100}
+              cx="50%"
+              cy="50%"
+              r={radius}
+              className="stroke-[#97480d]"
+              strokeWidth="12"
+              strokeDasharray={circumference}
+              animate={{ strokeDashoffset }}
+              transition={{ duration: 0.5, ease: 'easeInOut' }}
               strokeLinecap="round"
               fill="transparent"
-              initial={{ strokeDashoffset: 691 }}
-              animate={{ strokeDashoffset: 691 - (691 * progressPercent) / 100 }}
-              transition={{ duration: 0.5 }}
             />
           </svg>
 
           {/* Center Timer Text */}
-          <div className="absolute flex flex-col items-center justify-center text-center">
-            <motion.div
-              animate={{ scale: clickerPulse ? 1.1 : 1 }}
-              className="text-4xl sm:text-5xl font-black tracking-tight text-slate-900 font-mono mb-1"
-            >
+          <div className="absolute flex flex-col items-center justify-center">
+            <span className="font-mono text-4xl sm:text-5xl font-black text-slate-900 tracking-tighter">
               {formatTime(timeLeft)}
-            </motion.div>
-            <span className="text-xs font-semibold text-slate-400">
-              {isRunning ? 'Seansta...' : timeLeft === 0 ? 'Tamamlandı' : 'Hazır'}
+            </span>
+            <span className="text-xs font-extrabold text-slate-400 uppercase tracking-widest mt-1">
+              {isRunning ? 'Seans Devam Ediyor' : 'Hazır'}
             </span>
           </div>
         </div>
 
-        {/* Clicker Button (Interactive Sound / Visual Cue) */}
-        <div className="mb-8 text-center">
-          <button
+        {/* Tactile High-Tech Clicker Button */}
+        <div className="mt-2 text-center">
+          <motion.button
+            whileTap={{ scale: 0.94 }}
             onClick={handleTriggerClicker}
-            className={`w-full max-w-xs mx-auto py-4 px-6 rounded-2xl font-black text-sm transition-all shadow-md active:scale-[0.96] flex items-center justify-center gap-2 border ${
-              clickerPulse
-                ? 'bg-amber-400 text-slate-950 border-amber-500 ring-4 ring-amber-200'
-                : 'bg-white text-slate-800 border-slate-200 hover:bg-amber-50 hover:border-amber-300'
-            }`}
+            className="w-full py-4 px-6 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-slate-950 font-black text-sm rounded-2xl shadow-lg border-2 border-amber-300 flex items-center justify-center gap-2 transition-all active:scale-95 group"
           >
-            <Bell className="w-5 h-5 text-amber-600" />
+            <Bell className="w-5 h-5 fill-slate-950 text-slate-950 group-hover:rotate-12 transition-transform" />
             <span>Clicker Sesi Çal 🔔</span>
-          </button>
-          <span className="text-[11px] font-medium text-slate-400 mt-1 block">
-            Kedinin doğru hareketi yaptığı an clicker butonuna basın
-          </span>
+          </motion.button>
+          <p className="text-[11px] text-slate-400 font-medium mt-1.5">
+            Kedinizin doğru hareketi yaptığı an clicker butonuna basın
+          </p>
         </div>
 
-        {/* Treat Counter Component */}
-        <div className="bg-white rounded-2xl p-5 mb-8 border-[0.5px] border-slate-200 shadow-sm flex items-center justify-between">
+        {/* Treat Counter Card */}
+        <div className="mt-4 bg-white p-4 rounded-2xl border border-slate-200/80 shadow-2xs flex items-center justify-between">
           <div>
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
-              Verilen Ödül Sayısı
+            <span className="text-[10px] font-extrabold uppercase text-slate-400 tracking-wider block">
+              VERİLEN ÖDÜL SAYISI
             </span>
-            <span className="text-xl font-black text-slate-900">
+            <span className="text-lg font-black text-slate-900">
               {treatCount} adet
             </span>
           </div>
@@ -299,125 +266,118 @@ export const SessionTimerView: React.FC<SessionTimerViewProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={handleDecrementTreats}
-              className="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold transition-all active:scale-[0.95]"
+              className="w-10 h-10 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center transition-colors active:scale-95"
             >
-              <Minus className="w-4 h-4" />
+              <Minus className="w-5 h-5" />
             </button>
-
             <button
               onClick={handleIncrementTreats}
-              className="w-12 h-10 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 flex items-center justify-center font-black transition-all shadow-sm active:scale-[0.95] gap-1"
+              className="w-10 h-10 rounded-xl bg-[#97480d] hover:bg-[#7a3600] text-white font-bold flex items-center justify-center shadow-sm transition-all active:scale-95"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-5 h-5" />
             </button>
           </div>
         </div>
       </div>
 
-      {/* Primary Action Buttons */}
-      <div className="space-y-3">
+      {/* Main Control Actions (Start / Pause / Reset / Finish) */}
+      <div className="mt-6 space-y-3">
         <div className="flex items-center gap-3">
-          <button
+          <motion.button
+            whileTap={{ scale: 0.97 }}
             onClick={handleStartPause}
-            className={`flex-1 py-4 rounded-xl font-extrabold text-sm transition-all shadow-sm active:scale-[0.98] flex items-center justify-center gap-2 ${
+            className={`flex-1 py-4 font-black text-sm sm:text-base rounded-2xl shadow-md flex items-center justify-center gap-2 transition-all ${
               isRunning
-                ? 'bg-amber-500 hover:bg-amber-400 text-slate-950'
-                : 'bg-slate-900 hover:bg-slate-800 text-white'
+                ? 'bg-amber-600 hover:bg-amber-700 text-white'
+                : 'bg-slate-950 hover:bg-slate-800 text-white'
             }`}
           >
             {isRunning ? (
               <>
-                <Pause className="w-5 h-5 fill-current" />
+                <Pause className="w-5 h-5 fill-white" />
                 <span>Duraklat</span>
               </>
             ) : (
               <>
-                <Play className="w-5 h-5 fill-current" />
-                <span>{timeLeft < selectedDuration ? 'Devam Et' : 'Başlat'}</span>
+                <Play className="w-5 h-5 fill-white" />
+                <span>Başlat</span>
               </>
             )}
-          </button>
+          </motion.button>
 
           <button
             onClick={handleReset}
-            className="p-4 rounded-xl bg-white text-slate-600 border-[0.5px] border-slate-200 hover:bg-slate-100 transition-all active:scale-[0.95]"
             title="Sıfırla"
+            className="w-14 h-14 rounded-2xl border border-slate-200/90 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center shadow-2xs transition-colors active:scale-95 shrink-0"
           >
             <RotateCcw className="w-5 h-5" />
           </button>
         </div>
 
-        {timeLeft < selectedDuration && (
+        {/* Finish Early Action */}
+        {(isRunning || selectedDuration - timeLeft > 10) && (
           <button
             onClick={handleFinishEarly}
-            className="w-full py-3 rounded-xl bg-emerald-50 text-emerald-800 font-bold text-xs border border-emerald-200 hover:bg-emerald-100 transition-all active:scale-[0.98] flex items-center justify-center gap-1.5"
+            className="w-full py-2.5 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-extrabold text-xs rounded-xl transition-colors flex items-center justify-center gap-1.5"
           >
-            <CheckCircle className="w-4 h-4 text-emerald-600" />
+            <CheckCircle className="w-4 h-4" />
             <span>Seansı Bitir ve Kaydet</span>
           </button>
         )}
       </div>
 
-      {/* Save Session Summary Modal */}
+      {/* Completion Summary Evaluation Modal */}
       <AnimatePresence>
         {isFinished && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-white rounded-3xl max-w-md w-full p-6 border-[0.5px] border-slate-200 shadow-2xl relative"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-3xl p-6 shadow-2xl border border-slate-200 max-w-sm w-full space-y-4 font-sans text-center"
             >
-              <button
-                onClick={() => setIsFinished(false)}
-                className="absolute right-4 top-4 text-slate-400 hover:text-slate-600 p-1"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center mb-3">
-                <Award className="w-6 h-6" />
+              <div className="w-14 h-14 rounded-full bg-amber-100 text-[#97480d] flex items-center justify-center mx-auto shadow-inner">
+                <Award className="w-7 h-7" />
               </div>
 
-              <h2 className="text-xl font-black text-slate-900 tracking-tight mb-1">
-                Tebrikler! Seans Tamamlandı 🎉
-              </h2>
-              <p className="text-xs text-slate-500 font-medium mb-5">
-                Kedinizin odaklanma performansını kaydedin.
-              </p>
+              <div>
+                <h3 className="text-2xl font-black text-slate-900 font-serif">
+                  Tebrikler! 🎉
+                </h3>
+                <p className="text-xs text-slate-500 font-medium mt-1">
+                  {skillTitle} eğitimi tamamlandı
+                </p>
+              </div>
 
-              {/* Summary Stats Badges */}
-              <div className="grid grid-cols-2 gap-3 mb-5">
-                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200/70 text-center">
-                  <span className="text-[11px] font-bold text-slate-400 block">Süre</span>
-                  <span className="text-base font-black text-slate-800">
-                    {formatTime(selectedDuration - timeLeft)}
-                  </span>
+              <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200/60 flex items-center justify-around text-xs font-extrabold text-slate-800">
+                <div>
+                  <span className="text-[10px] text-slate-400 block font-normal">Süre</span>
+                  <span>{formatTime(selectedDuration - timeLeft)}</span>
                 </div>
-                <div className="p-3 bg-amber-50 rounded-xl border border-amber-200/70 text-center">
-                  <span className="text-[11px] font-bold text-amber-700 block">Ödül Sayısı</span>
-                  <span className="text-base font-black text-amber-900">
-                    {treatCount} Adet
-                  </span>
+                <div className="w-px h-6 bg-slate-200" />
+                <div>
+                  <span className="text-[10px] text-slate-400 block font-normal">Ödül</span>
+                  <span>{treatCount} Adet</span>
                 </div>
               </div>
 
-              {/* Rating Star Selection */}
-              <div className="mb-5">
-                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-2">
-                  Seans Başarı Derecesi
-                </label>
-                <div className="flex items-center justify-center gap-2">
+              {/* Star Rating */}
+              <div className="space-y-1">
+                <span className="text-xs font-bold text-slate-600 block">
+                  Seans Değerlendirmesi
+                </span>
+                <div className="flex items-center justify-center gap-1.5">
                   {([1, 2, 3, 4, 5] as const).map((star) => (
                     <button
                       key={star}
+                      type="button"
                       onClick={() => setRating(star)}
-                      className="p-2 text-amber-400 hover:scale-110 transition-transform active:scale-95"
+                      className="p-1 transition-transform active:scale-125"
                     >
                       <Star
                         className={`w-7 h-7 ${
                           star <= rating
-                            ? 'fill-amber-400 text-amber-400'
+                            ? 'text-amber-400 fill-amber-400'
                             : 'text-slate-300'
                         }`}
                       />
@@ -426,27 +386,22 @@ export const SessionTimerView: React.FC<SessionTimerViewProps> = ({
                 </div>
               </div>
 
-              {/* Notes Textarea */}
-              <div className="mb-6">
-                <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1.5">
-                  Seans Notları (Opsiyonel)
-                </label>
+              {/* Notes Input */}
+              <div>
                 <textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Kedi bugün ne kadar odaklıydı? Hangi adımlarda zorlandı?"
-                  rows={3}
-                  className="w-full bg-slate-50 border-[0.5px] border-slate-200 rounded-xl p-3 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                  placeholder="Seans notları (ör: Ses tonuna harika tepki verdi...)"
+                  rows={2}
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs text-slate-800 focus:outline-none focus:border-[#97480d]"
                 />
               </div>
 
-              {/* Save CTA */}
               <button
                 onClick={handleSaveModal}
-                className="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-sm rounded-xl transition-all shadow-md active:scale-[0.98] flex items-center justify-center gap-2"
+                className="w-full py-3.5 bg-[#97480d] hover:bg-[#7a3600] text-white font-black text-xs rounded-2xl shadow-md transition-all active:scale-95"
               >
-                <Sparkles className="w-4 h-4" />
-                <span>Seansı Kaydet</span>
+                Seansı Kaydet
               </button>
             </motion.div>
           </div>
