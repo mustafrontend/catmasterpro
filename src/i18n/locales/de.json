@@ -128,5 +128,22 @@
     "cancel": "Abbrechen",
     "save": "Speichern",
     "update": "Aktualisieren"
+  },
+  "quickActions": {
+    "title": "Was Möchtest Du Tun?",
+    "subtitle": "Wähle eine Schnellaktion oder eine Trainingssitzung",
+    "startNow": "Jetzt Starten",
+    "timerTitle": "3-Minuten-Training Starten",
+    "timerSubtitle": "Sitzung mit Clicker und Leckerli starten",
+    "lessonsTitle": "Trainingslektionen Erkunden",
+    "lessonsSubtitle": "Rückruf, Pfote geben, Transportbox & mehr",
+    "behaviorTitle": "Aggressions- & Beiß-Ratgeber",
+    "behaviorSubtitle": "Lösungen für Beiß- & Kratzverhalten",
+    "healthTitle": "Gesundheits-, Gewichts- & Impf-Tracker",
+    "healthSubtitle": "Gewichtsdiagramm, Impfpass & Tierarzttermine",
+    "moodTitle": "KI Miau- & Stimmungs-Analyser",
+    "moodSubtitle": "Stimmung der Katze mit KI analysieren",
+    "calmingTitle": "Beruhigende Katzenmusik",
+    "calmingSubtitle": "Entspannende Anti-Stress-Klänge & Musik"
   }
 }

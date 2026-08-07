@@ -128,5 +128,22 @@
     "cancel": "取消",
     "save": "保存",
     "update": "更新"
+  },
+  "quickActions": {
+    "title": "您想要做什么？",
+    "subtitle": "为您的猫咪选择快捷操作或训练课程",
+    "startNow": "立即开始",
+    "timerTitle": "开始 3 分钟训练",
+    "timerSubtitle": "使用响片和奖励零食开始训练",
+    "lessonsTitle": "浏览训练课程",
+    "lessonsSubtitle": "召回、握手、航空箱适应等",
+    "behaviorTitle": "攻击性与咬人指南",
+    "behaviorSubtitle": "解决咬人、抓挠及夜间跑酷问题",
+    "healthTitle": "健康、体重与疫苗记录",
+    "healthSubtitle": "体重曲线、疫苗日程及兽医预约",
+    "moodTitle": "AI 喵叫与情绪分析",
+    "moodSubtitle": "运用人工智能检测猫咪情绪",
+    "calmingTitle": "猫咪舒缓音乐",
+    "calmingSubtitle": "抗应激放松音效与音乐"
   }
 }

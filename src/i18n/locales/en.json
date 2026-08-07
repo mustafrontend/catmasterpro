@@ -128,5 +128,22 @@
     "cancel": "Cancel",
     "save": "Save Cat",
     "update": "Update Cat"
+  },
+  "quickActions": {
+    "title": "What Would You Like To Do?",
+    "subtitle": "Choose a quick action or training session for your cat",
+    "startNow": "Start Now",
+    "timerTitle": "Start 3-Minute Training",
+    "timerSubtitle": "Start clicker and treat session",
+    "lessonsTitle": "Explore Training Lessons",
+    "lessonsSubtitle": "Recall, high five, carrier training & more",
+    "behaviorTitle": "Aggression & Biting Guide",
+    "behaviorSubtitle": "Solutions for biting, scratching & night zoomies",
+    "healthTitle": "Health, Weight & Vaccine Tracker",
+    "healthSubtitle": "Weight chart, vaccine schedule & vet visits",
+    "moodTitle": "AI Meow & Mood Analyzer",
+    "moodSubtitle": "Detect cat mood using AI technology",
+    "calmingTitle": "Calming Cat Music",
+    "calmingSubtitle": "Anti-stress relaxing sounds and melodies"
   }
 }

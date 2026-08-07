@@ -128,5 +128,22 @@
     "cancel": "キャンセル",
     "save": "保存",
     "update": "更新"
+  },
+  "quickActions": {
+    "title": "何を行いますか？",
+    "subtitle": "クイックアクションまたはトレーニングセッションを選択",
+    "startNow": "今すぐ開始",
+    "timerTitle": "3分間トレーニングを開始",
+    "timerSubtitle": "クリッカーとおやつでセッション開始",
+    "lessonsTitle": "トレーニングレッスンを見る",
+    "lessonsSubtitle": "呼び戻し、お手、キャリー慣れなど",
+    "behaviorTitle": "攻撃性・噛み癖ガイド",
+    "behaviorSubtitle": "噛み癖、引っ掻き、夜運動会の解決策",
+    "healthTitle": "健康・体重・ワクチン管理",
+    "healthSubtitle": "体重グラフ、ワクチン日程、通院記録",
+    "moodTitle": "AI 鳴き声＆気分アナライザー",
+    "moodSubtitle": "AI技術で愛猫の気分を判定",
+    "calmingTitle": "リラックス猫用音楽",
+    "calmingSubtitle": "ストレス解消の癒しサウンド＆メロディ"
   }
 }

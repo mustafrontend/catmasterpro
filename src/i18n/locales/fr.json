@@ -128,5 +128,22 @@
     "cancel": "Annuler",
     "save": "Enregistrer",
     "update": "Mettre à jour"
+  },
+  "quickActions": {
+    "title": "Que Souhaitez-vous Faire ?",
+    "subtitle": "Choisissez une action rapide ou une séance d'entraînement",
+    "startNow": "Démarrer",
+    "timerTitle": "Entraînement de 3 Minutes",
+    "timerSubtitle": "Démarrer une session avec clicker et friandises",
+    "lessonsTitle": "Explorer les Leçons",
+    "lessonsSubtitle": "Rappel, donner la patte, sac de transport & plus",
+    "behaviorTitle": "Guide Agressivité & Morsures",
+    "behaviorSubtitle": "Solutions contre les morsures et griffures",
+    "healthTitle": "Suivi Santé, Poids et Vaccins",
+    "healthSubtitle": "Courbe de poids, vaccins et rendez-vous véto",
+    "moodTitle": "Analyseur IA Miaulements & Humeur",
+    "moodSubtitle": "Détecter l'humeur du chat par intelligence artificielle",
+    "calmingTitle": "Musique Apaisante pour Chat",
+    "calmingSubtitle": "Sons et mélodies relaxantes anti-stress"
   }
 }

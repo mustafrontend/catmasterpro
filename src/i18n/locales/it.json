@@ -128,5 +128,22 @@
     "cancel": "Annulla",
     "save": "Salva",
     "update": "Aggiorna"
+  },
+  "quickActions": {
+    "title": "Cosa Vorresti Fare?",
+    "subtitle": "Scegli un'azione rapida o una sessione per il tuo gatto",
+    "startNow": "Inizia Ora",
+    "timerTitle": "Inizia Addestramento di 3 Min",
+    "timerSubtitle": "Avvia sessione con clicker e snack",
+    "lessonsTitle": "Esplora Lezioni di Addestramento",
+    "lessonsSubtitle": "Richiamo, dare la zampa, trasportino e altro",
+    "behaviorTitle": "Guida ad Aggressività & Morsi",
+    "behaviorSubtitle": "Soluzioni per morsi, graffi e corse notturne",
+    "healthTitle": "Monitoraggio Salute, Peso e Vaccini",
+    "healthSubtitle": "Grafico peso, vaccini e visite dal veterinario",
+    "moodTitle": "Analizzatore AI Miagolio & Umore",
+    "moodSubtitle": "Rileva l'umore del gatto con intelligenza artificiale",
+    "calmingTitle": "Musica Rilassante per Gatti",
+    "calmingSubtitle": "Suoni e melodie rilassanti antistress"
   }
 }

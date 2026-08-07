@@ -134,41 +134,31 @@ export const HomePageView: React.FC<HomePageViewProps> = ({
             </p>
           </div>
 
-          {/* 3D Cat Display with Animated Floating Particles & Pulse Rings */}
-          <div className="my-1 relative flex items-center justify-center">
-            {/* Outer Pulsing Aura Ring */}
+          {/* 3D Kinetic Cat Display with Floating Depth Animation */}
+          <div className="my-1 relative flex items-center justify-center perspective-1000">
+            {/* Outer Pulsing Glow Aura */}
             <motion.div
-              animate={{ scale: [1, 1.03, 1], opacity: [0.4, 0.8, 0.4] }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute inset-0 rounded-2xl bg-gradient-to-r from-amber-400/20 via-orange-300/30 to-amber-500/20 blur-md pointer-events-none"
+              animate={{ scale: [1, 1.04, 1], opacity: [0.35, 0.75, 0.35] }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-amber-400/30 via-orange-400/40 to-amber-500/30 blur-lg pointer-events-none"
             />
 
-            <div className="w-full h-40 sm:h-44 rounded-2xl bg-slate-950 border border-amber-200/60 overflow-hidden relative shadow-md group cursor-pointer" onClick={onOpenTimer}>
+            <motion.div
+              animate={{ y: [-3, 3, -3], rotateX: [0, 2, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              whileHover={{ scale: 1.03, rotateY: 3, rotateX: -3 }}
+              onClick={onOpenTimer}
+              className="w-full h-44 sm:h-48 rounded-2xl bg-slate-950 border border-amber-200/80 overflow-hidden relative shadow-lg group cursor-pointer transform-gpu transition-all duration-300"
+            >
               <img
                 src="/assets/cat_3d_hero.jpg"
-                alt="3D Cat Training"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                alt="3D Cat"
+                className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
               />
-
-              {/* Floating Animated Particle Badges over 3D Image */}
-              <motion.div
-                animate={{ y: [-5, 5, -5], rotate: [-4, 4, -4] }}
-                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-xl shadow-md border border-white/50 flex items-center gap-1.5 text-[10px] font-black text-[#97480d]"
-              >
-                <span>🧠</span>
-                <span>Zeka Eğitimi</span>
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [4, -4, 4], rotate: [3, -3, 3] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute bottom-3 right-3 bg-slate-900/85 backdrop-blur-md px-2.5 py-1 rounded-xl shadow-md border border-white/20 flex items-center gap-1.5 text-[10px] font-black text-amber-300"
-              >
-                <span>🐾</span>
-                <span>Clicker Uyumlu</span>
-              </motion.div>
-            </div>
+              
+              {/* Subtle 3D Glass Light Reflection overlay */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            </motion.div>
           </div>
 
           {/* Quick Animated Stat Pills Row */}

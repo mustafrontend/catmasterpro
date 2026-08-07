@@ -128,5 +128,22 @@
     "cancel": "İptal",
     "save": "Kaydet",
     "update": "Güncelle"
+  },
+  "quickActions": {
+    "title": "Ne Yapmak İstiyorsunuz?",
+    "subtitle": "Kediniz için hızlı bir işlem veya eğitim seçin",
+    "startNow": "Şimdi Başla",
+    "timerTitle": "3 Dakikalık Eğitime Başla",
+    "timerSubtitle": "Clicker ve ödül maması ile seans başlat",
+    "lessonsTitle": "Eğitim Derslerini İncele",
+    "lessonsSubtitle": "İsmine gelme, pati verme, çanta eğitimi",
+    "behaviorTitle": "Agresyon & Isırma Rehberi",
+    "behaviorSubtitle": "Isırma, tırmalama ve gece koşturması çözümleri",
+    "healthTitle": "Sağlık, Kilo ve Aşı Takibi",
+    "healthSubtitle": "Kilo grafiği, aşı takvimi ve vet randevuları",
+    "moodTitle": "AI Miyavlama & Mood Analizörü",
+    "moodSubtitle": "Yapay zeka ile kedi ruh hali tespiti",
+    "calmingTitle": "Sakinleştirici Kedi Müzikleri",
+    "calmingSubtitle": "Stres önleyici rahatlatıcı sesler ve müzik"
   }
 }

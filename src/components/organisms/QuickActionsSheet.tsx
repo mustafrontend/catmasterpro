@@ -29,45 +29,45 @@ export const QuickActionsSheet: React.FC<QuickActionsSheetProps> = ({
   const actions = [
     {
       id: 'timer',
-      title: '3 Dakikalık Eğitime Başla',
-      subtitle: 'Clicker ve ödül maması ile seans başlat',
+      title: t('quickActions.timerTitle', '3 Dakikalık Eğitime Başla'),
+      subtitle: t('quickActions.timerSubtitle', 'Clicker ve ödül maması ile seans başlat'),
       icon: Timer,
       color: 'bg-[#97480d] text-white',
-      badge: 'Şimdi Başla',
+      badge: t('quickActions.startNow', 'Şimdi Başla'),
     },
     {
       id: 'lessons',
-      title: 'Eğitim Derslerini İncele',
-      subtitle: 'İsmine gelme, pati verme, çanta eğitimi',
+      title: t('quickActions.lessonsTitle', 'Eğitim Derslerini İncele'),
+      subtitle: t('quickActions.lessonsSubtitle', 'İsmine gelme, pati verme, çanta eğitimi'),
       icon: GraduationCap,
       color: 'bg-amber-100 text-[#97480d]',
     },
     {
       id: 'behavior',
-      title: 'Agresyon & Isırma Rehberi',
-      subtitle: 'Isırma, tırmalama ve gece koşturması çözümleri',
+      title: t('quickActions.behaviorTitle', 'Agresyon & Isırma Rehberi'),
+      subtitle: t('quickActions.behaviorSubtitle', 'Isırma, tırmalama ve gece koşturması çözümleri'),
       icon: ShieldAlert,
       color: 'bg-sky-100 text-sky-700',
     },
     {
       id: 'health',
-      title: 'Sağlık, Kilo ve Aşı Takibi',
-      subtitle: 'Kilo grafiği, aşı takvimi ve vet randevuları',
+      title: t('quickActions.healthTitle', 'Sağlık, Kilo ve Aşı Takibi'),
+      subtitle: t('quickActions.healthSubtitle', 'Kilo grafiği, aşı takvimi ve vet randevuları'),
       icon: HeartPulse,
       color: 'bg-purple-100 text-purple-700',
     },
     {
       id: 'mood',
-      title: 'AI Miyavlama & Mood Analizörü',
-      subtitle: 'Yapay zeka ile kedi ruh hali tespiti',
+      title: t('quickActions.moodTitle', 'AI Miyavlama & Mood Analizörü'),
+      subtitle: t('quickActions.moodSubtitle', 'Yapay zeka ile kedi ruh hali tespiti'),
       icon: Brain,
       color: 'bg-emerald-100 text-emerald-700',
       badge: 'AI',
     },
     {
       id: 'calming',
-      title: 'Sakinleştirici Kedi Müzikleri',
-      subtitle: 'Stres önleyici rahatlatıcı sesler ve müzik',
+      title: t('quickActions.calmingTitle', 'Sakinleştirici Kedi Müzikleri'),
+      subtitle: t('quickActions.calmingSubtitle', 'Stres önleyici rahatlatıcı sesler ve müzik'),
       icon: Music,
       color: 'bg-rose-100 text-rose-700',
     },
@@ -102,12 +102,12 @@ export const QuickActionsSheet: React.FC<QuickActionsSheetProps> = ({
               <div>
                 <div className="flex items-center gap-2">
                   <h2 className="font-serif font-black text-xl text-[#97480d] tracking-tight">
-                    Ne Yapmak İstiyorsunuz?
+                    {t('quickActions.title', 'Ne Yapmak İstiyorsunuz?')}
                   </h2>
                   <Sparkles className="w-5 h-5 text-amber-500" />
                 </div>
                 <p className="text-xs font-semibold text-slate-500 mt-0.5">
-                  Kediniz için hızlı bir işlem veya eğitim seçin
+                  {t('quickActions.subtitle', 'Kediniz için hızlı bir işlem veya eğitim seçin')}
                 </p>
               </div>
 

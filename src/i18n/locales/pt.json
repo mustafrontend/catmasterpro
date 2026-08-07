@@ -128,5 +128,22 @@
     "cancel": "Cancelar",
     "save": "Guardar",
     "update": "Atualizar"
+  },
+  "quickActions": {
+    "title": "O Que Gostaria de Fazer?",
+    "subtitle": "Escolha uma ação rápida ou sessão de treino para o seu gato",
+    "startNow": "Começar Agora",
+    "timerTitle": "Iniciar Treino de 3 Min",
+    "timerSubtitle": "Iniciar sessão com clicker e petiscos",
+    "lessonsTitle": "Explorar Lições de Treino",
+    "lessonsSubtitle": "Chamar pelo nome, dar a pata, caixa de transporte e mais",
+    "behaviorTitle": "Guia de Agressividade & Mordidelas",
+    "behaviorSubtitle": "Soluções para mordidelas, arranhões e corridas noturnas",
+    "healthTitle": "Registo de Saúde, Peso e Vacinas",
+    "healthSubtitle": "Gráfico de peso, vacinas e consultas no veterinário",
+    "moodTitle": "Analisador IA de Miau & Humor",
+    "moodSubtitle": "Detetar o humor do gato com inteligência artificial",
+    "calmingTitle": "Música Calmante para Gatos",
+    "calmingSubtitle": "Sons e melodias relaxantes anti-stress"
   }
 }

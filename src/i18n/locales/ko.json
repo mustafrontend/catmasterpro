@@ -128,5 +128,22 @@
     "cancel": "취소",
     "save": "저장",
     "update": "업데이트"
+  },
+  "quickActions": {
+    "title": "무엇을 하시겠습니까?",
+    "subtitle": "반려묘를 위한 빠른 작업 또는 훈련 세션을 선택하세요",
+    "startNow": "지금 시작",
+    "timerTitle": "3분 훈련 시작하기",
+    "timerSubtitle": "클리커와 간식으로 세션 시작",
+    "lessonsTitle": "훈련 레슨 탐색",
+    "lessonsSubtitle": "부르기, 손 주기, 이동장 훈련 등",
+    "behaviorTitle": "공격성 & 물기 가이드",
+    "behaviorSubtitle": "물기, 긁기, 야간 우다다 해결책",
+    "healthTitle": "건강, 체중 및 백신 기록",
+    "healthSubtitle": "체중 그래프, 예방접종 일정 및 병원 방문",
+    "moodTitle": "AI 야옹 & 기분 분석기",
+    "moodSubtitle": "인공지능으로 고양이 기분 분석",
+    "calmingTitle": "심신 안정 고양이 음악",
+    "calmingSubtitle": "스트레스 해소 힐링 사운드 & 멜로디"
   }
 }
