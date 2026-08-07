@@ -9,6 +9,9 @@
 ### **Subtitle (Promotional Text)**
 Master cat training with 30 video lessons, solve behavior issues, track vet passport & play calming sounds!
 
+### **App Store Keywords Field (100 Chars Max)**
+cat training,cat translator,cat sound,kitten,cat simulator,litter box,cat game,meow,cat voice,vet
+
 ### **Full Description**
 Cat Master PRO is the ultimate all-in-one cat training, behavior, health, and calming audio app designed for cat parents and feline lovers. Built on positive reinforcement methodology and expert veterinary guidance, Cat Master PRO empowers you to build a happy, well-behaved bond with your cat.
 
@@ -32,6 +35,21 @@ Start your cat training journey today with Cat Master PRO!
 
 ### **Alt Başlık (Promosyon Metni)**
 30 adım adım video dersle kedi eğitimi verin, agresyonu çözün, aşı karnesi tutun ve sakinleştirici müzik dinletin!
+
+### **App Store Anahtar Kelimeler / Keywords Alanı (Max 100 Karakter - Kopyalamaya Hazır)**
+kedi eğitimi,kedi sesi,kedi oyunu,miyav,veteriner,yavru kedi,kedi miyavlaması,kum kabı,kedi bakımı
+
+### **Arama Kelimeleri Eşleşme Tablosu (TR - ASO Optimization)**:
+- `cat training` -> **kedi eğitimi**
+- `cat translator` -> **kedi dili / kedi sesi**
+- `cat sound` -> **kedi sesi / kedi miyavlaması**
+- `kitten` -> **yavru kedi**
+- `cat simulator` -> **kedi oyunu / kedi simülatörü**
+- `litter box` -> **kum kabı eğitimi**
+- `cat game` -> **kedi oyunu**
+- `meow` -> **miyav / miyavlama**
+- `cat voice` -> **kedi sesi / sesleri**
+- `vet` -> **veteriner / aşı karnesi**
 
 ### **Tam Açıklama**
 Cat Master PRO; kedi sahipleri ve kedi severler için tasarlanmış en kapsamlı kedi eğitimi, davranış düzeltme, sağlık takibi ve sakinleştirici ses uygulamasıdır. Bilimsel pozitif pekiştirme metodolojisi ve uzman veteriner rehberliğiyle geliştirilen Cat Master PRO, kedinizle mutlu, eğitimli ve güçlü bir bağ kurmanızı sağlar.
