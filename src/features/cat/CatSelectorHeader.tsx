@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Crown, Edit3, Check, Plus, User, Sparkles } from 'lucide-react';
 import { useCatStore } from '../../store/catStore';
 import { Cat } from '../../types/cat';
@@ -16,6 +17,7 @@ export const CatSelectorHeader: React.FC<CatSelectorHeaderProps> = ({
   onOpenEditCatModal,
   onOpenPaywallModal,
 }) => {
+  const { t } = useTranslation();
   const {
     cats,
     activeCatId,
@@ -101,7 +103,7 @@ export const CatSelectorHeader: React.FC<CatSelectorHeaderProps> = ({
               >
                 <div className="px-3 py-2 border-b border-slate-100 flex items-center justify-between">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
-                    Kedileriniz ({cats.length})
+                    {t('header.yourCats', 'Kedileriniz')} ({cats.length})
                   </span>
                   {activeCat && (
                     <button
@@ -112,7 +114,7 @@ export const CatSelectorHeader: React.FC<CatSelectorHeaderProps> = ({
                       }}
                       className="text-[11px] font-bold text-[#97480d] hover:underline flex items-center gap-1"
                     >
-                      <Edit3 className="w-3 h-3" /> Düzenle
+                      <Edit3 className="w-3 h-3" /> {t('header.edit', 'Düzenle')}
                     </button>
                   )}
                 </div>
@@ -149,7 +151,7 @@ export const CatSelectorHeader: React.FC<CatSelectorHeaderProps> = ({
 
                 {/* Language Switcher in Dropdown */}
                 <div className="px-3 py-2 border-t border-b border-slate-100 flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-600">Dil (Language):</span>
+                  <span className="text-xs font-bold text-slate-600">{t('header.languageLabel', 'Dil (Language):')}</span>
                   <select
                     value={currentLanguage}
                     onChange={(e) => {
@@ -176,7 +178,7 @@ export const CatSelectorHeader: React.FC<CatSelectorHeaderProps> = ({
                     }}
                     className="w-full py-2 px-3 rounded-xl border border-dashed border-slate-300 hover:border-[#97480d] hover:bg-amber-50/40 text-slate-700 hover:text-[#97480d] text-xs font-bold flex items-center justify-center gap-1.5 transition-all"
                   >
-                    <Plus className="w-4 h-4 text-[#97480d]" /> Yeni Kedi Ekle
+                    <Plus className="w-4 h-4 text-[#97480d]" /> {t('header.addCatBtn', 'Yeni Kedi Ekle')}
                   </button>
                 </div>
               </motion.div>

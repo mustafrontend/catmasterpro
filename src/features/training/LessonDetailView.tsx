@@ -18,7 +18,7 @@ import {
   Shield,
   Feather
 } from 'lucide-react';
-import { Lesson, LESSONS_DATA } from './lessonsData';
+import { Lesson, LESSONS_DATA, getLocalizedLesson } from './lessonsData';
 
 interface LessonDetailViewProps {
   lessonId: string;
@@ -46,8 +46,9 @@ export const LessonDetailView: React.FC<LessonDetailViewProps> = ({
   onUnlockPremium,
   isPremiumUser = false,
 }) => {
-  const { t } = useTranslation();
-  const lesson = LESSONS_DATA.find((l) => l.id === lessonId) || LESSONS_DATA[0];
+  const { t, i18n } = useTranslation();
+  const rawLesson = LESSONS_DATA.find((l) => l.id === lessonId) || LESSONS_DATA[0];
+  const lesson = getLocalizedLesson(rawLesson, i18n.language || 'tr');
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
   const isLocked = lesson.isPremium && !isPremiumUser;
@@ -120,7 +121,7 @@ export const LessonDetailView: React.FC<LessonDetailViewProps> = ({
       <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm space-y-4">
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-black text-[#97480d] uppercase tracking-wider font-serif">
-            Adım {currentStepIndex + 1} / {lesson.steps.length}: {currentStep.title}
+            {t('lessons.stepLabel', 'Adım')} {currentStepIndex + 1} / {lesson.steps.length}: {currentStep.title}
           </h3>
           <span className="text-xs font-bold text-slate-400">{progressPercent}%</span>
         </div>
@@ -140,7 +141,7 @@ export const LessonDetailView: React.FC<LessonDetailViewProps> = ({
             disabled={currentStepIndex === 0}
             className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 disabled:opacity-40 font-bold text-xs rounded-xl flex items-center gap-1 transition-all active:scale-95"
           >
-            <ChevronLeft className="w-4 h-4" /> Önceki Adım
+            <ChevronLeft className="w-4 h-4" /> {t('lessons.prevStep', 'Önceki Adım')}
           </button>
 
           <button
@@ -148,7 +149,7 @@ export const LessonDetailView: React.FC<LessonDetailViewProps> = ({
             disabled={currentStepIndex === lesson.steps.length - 1}
             className="px-4 py-2.5 bg-[#97480d] hover:bg-[#7a3600] text-white disabled:opacity-40 font-bold text-xs rounded-xl flex items-center gap-1 transition-all active:scale-95"
           >
-            Sonraki Adım <ChevronRight className="w-4 h-4" />
+            {t('lessons.nextStep', 'Sonraki Adım')} <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </div>
