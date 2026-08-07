@@ -62,7 +62,7 @@ export const HomePageView: React.FC<HomePageViewProps> = ({
           <div className="flex items-center gap-1.5 bg-amber-50/80 border border-amber-200/90 px-3 py-1.5 rounded-full shadow-2xs">
             <Flame className="w-4 h-4 text-orange-500 fill-orange-500" />
             <span className="text-xs font-black text-slate-800">
-              {streak.currentStreak || 5} {t('home.streakBadge')}
+              {streak.currentStreak || 0} {t('home.streakBadge')}
             </span>
           </div>
 

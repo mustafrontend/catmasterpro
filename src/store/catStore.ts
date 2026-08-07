@@ -75,11 +75,11 @@ const INITIAL_SKILLS: SkillProgress[] = [
 ];
 
 const INITIAL_STREAK: StreakInfo = {
-  currentStreak: 5,
-  bestStreak: 14,
-  lastActiveDate: new Date().toISOString().split('T')[0],
+  currentStreak: 0,
+  bestStreak: 0,
+  lastActiveDate: '',
   weeklyGoalDays: 5,
-  completedDaysThisWeek: 4,
+  completedDaysThisWeek: 0,
 };
 
 const INITIAL_WEIGHT_LOGS: WeightLog[] = [
