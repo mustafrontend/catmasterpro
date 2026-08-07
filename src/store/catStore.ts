@@ -15,32 +15,7 @@ import {
 import { StorageService, STORAGE_KEYS } from '../services/storageService';
 import { CatApiService } from '../services/catApiService';
 
-const INITIAL_CATS: Cat[] = [
-  {
-    id: 'cat_1',
-    name: 'Luna',
-    breed: 'British Shorthair',
-    ageYears: 2,
-    ageMonths: 4,
-    gender: 'female',
-    weightKg: 4.2,
-    avatarBg: 'bg-indigo-500',
-    createdAt: new Date().toISOString(),
-    notes: 'Very smart, loves salmon treats. Responds well to clicker.',
-  },
-  {
-    id: 'cat_2',
-    name: 'Milo',
-    breed: 'Scottish Fold',
-    ageYears: 1,
-    ageMonths: 8,
-    gender: 'male',
-    weightKg: 3.8,
-    avatarBg: 'bg-emerald-500',
-    createdAt: new Date().toISOString(),
-    notes: 'Enthusiastic but easily distracted. Working on recall.',
-  },
-];
+const INITIAL_CATS: Cat[] = [];
 
 const INITIAL_SKILLS: SkillProgress[] = [
   {

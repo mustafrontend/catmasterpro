@@ -32,6 +32,7 @@ import { BehaviorLibraryView } from './features/behavior/BehaviorLibraryView';
 import { LessonDetailView } from './features/training/LessonDetailView';
 import { SessionTimerView } from './features/timer/SessionTimerView';
 import { PaywallModal } from './features/paywall/PaywallModal';
+import { QuickActionsSheet } from './components/organisms/QuickActionsSheet';
 import { initializeRevenueCat } from './services/revenueCatService';
 import { requestAudioAndNotificationPermissions, playKittenWelcomeMeow } from './services/soundService';
 import { LESSONS_DATA, Lesson } from './features/training/lessonsData';
@@ -40,18 +41,25 @@ export type AppPage = 'home' | 'lessons' | 'lesson-detail' | 'behavior' | 'profi
 
 export const App: React.FC = () => {
   const { t } = useTranslation();
-  const { isPremium, streak, getActiveCat, recordTrainingSession, fetchLessonsFromApi, syncWithCloudBackend, restorePurchases } = useCatStore();
+  const { cats, isPremium, streak, getActiveCat, recordTrainingSession, fetchLessonsFromApi, syncWithCloudBackend, restorePurchases } = useCatStore();
 
   const [currentPage, setCurrentPage] = useState<AppPage>('home');
   const [selectedLessonId, setSelectedLessonId] = useState<string>('recall');
   const [isTimerOpen, setIsTimerOpen] = useState(false);
   const [isPaywallOpen, setIsPaywallOpen] = useState(false);
+  const [isAddCatModalOpen, setIsAddCatModalOpen] = useState(false);
+  const [isQuickActionsOpen, setIsQuickActionsOpen] = useState(false);
 
-  // Sync VPS backend, lessons, initialize RevenueCat, request sound permissions, and trigger meow on launch
+  // Sync VPS backend, lessons, initialize RevenueCat, request sound permissions, and check if initial cat creation is needed
   useEffect(() => {
     initializeRevenueCat();
     fetchLessonsFromApi();
     syncWithCloudBackend();
+
+    // Auto open "Add Cat" modal if user has 0 cats registered
+    if (cats.length === 0) {
+      setIsAddCatModalOpen(true);
+    }
 
     // Request permissions & unlock iOS Audio Context
     requestAudioAndNotificationPermissions().then(() => {
@@ -101,10 +109,36 @@ export const App: React.FC = () => {
     setIsTimerOpen(false);
   };
 
+  const handleQuickActionSelect = (action: 'timer' | 'lessons' | 'behavior' | 'health' | 'mood' | 'calming') => {
+    switch (action) {
+      case 'timer':
+        setIsTimerOpen(true);
+        break;
+      case 'lessons':
+        setCurrentPage('lessons');
+        break;
+      case 'behavior':
+        setCurrentPage('behavior');
+        break;
+      case 'health':
+        setCurrentPage('profile');
+        break;
+      case 'mood':
+        setCurrentPage('mood');
+        break;
+      case 'calming':
+        setCurrentPage('calming');
+        break;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#fbf9f7] text-slate-800 flex flex-col font-sans">
       {/* Clean Single Top Header Bar */}
-      <CatSelectorHeader onOpenPaywallModal={() => setIsPaywallOpen(true)} />
+      <CatSelectorHeader
+        onOpenAddCatModal={() => setIsAddCatModalOpen(true)}
+        onOpenPaywallModal={() => setIsPaywallOpen(true)}
+      />
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 pt-4 pb-28">
@@ -162,7 +196,7 @@ export const App: React.FC = () => {
           />
         )}
 
-        {/* PAGE 6: PROFILE & HEALTH */}
+        {/* PAGE 7: PROFILE & HEALTH */}
         {currentPage === 'profile' && (
           <div className="space-y-6">
             <CatProfileManager
@@ -215,12 +249,13 @@ export const App: React.FC = () => {
             <span className="text-[10px]">{t('nav.lessons')}</span>
           </button>
 
-          {/* Center Floating Action Button: Start Training Session */}
+          {/* Center Floating Action Button: Quick Actions Bottom Sheet Popup */}
           <div className="relative -top-5">
             <motion.button
               whileTap={{ scale: 0.95 }}
-              onClick={() => setIsTimerOpen(true)}
+              onClick={() => setIsQuickActionsOpen(true)}
               className="w-14 h-14 rounded-full bg-gradient-to-tr from-[#97480d] to-[#fd9859] text-white flex flex-col items-center justify-center shadow-lg border-4 border-[#fbf9f7] active:scale-95 transition-all"
+              title="Hızlı İşlemler"
             >
               <CatIcon className="w-6 h-6 fill-white text-white" />
             </motion.button>
@@ -249,6 +284,19 @@ export const App: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {/* Quick Actions Bottom Sheet Popup */}
+      <QuickActionsSheet
+        isOpen={isQuickActionsOpen}
+        onClose={() => setIsQuickActionsOpen(false)}
+        onSelectAction={handleQuickActionSelect}
+      />
+
+      {/* Add Cat Modal (Initial Onboarding or Profile Add) */}
+      <AddCatModal
+        isOpen={isAddCatModalOpen}
+        onClose={() => setIsAddCatModalOpen(false)}
+      />
 
       {/* Interactive Training Session Timer Modal */}
       {isTimerOpen && (
