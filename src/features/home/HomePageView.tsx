@@ -113,6 +113,15 @@ export const HomePageView: React.FC<HomePageViewProps> = ({
             </motion.div>
 
             <motion.div
+              animate={{ y: [-2, 2, -2] }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black bg-emerald-100/90 text-emerald-900 border border-emerald-200/80 shadow-2xs"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+              <span>{t('home.vetApproved', 'Uzman Veterinerler Tarafından Hazırlanmıştır')}</span>
+            </motion.div>
+
+            <motion.div
               animate={{ scale: [1, 1.04, 1] }}
               transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
               className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800 border border-emerald-200"
