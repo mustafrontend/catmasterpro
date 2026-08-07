@@ -158,6 +158,8 @@
     "skip": "Skip",
     "prev": "Back",
     "next": "Next",
+    "selectLangStep": "Language Selection",
+    "continueToTour": "Continue",
     "startNowBtn": "Awesome! Let's Start 🚀",
     "step1Title": "Welcome to CatMaster PRO",
     "step1Sub": "Train your cat with 3-minute positive reinforcement sessions and scientific clicker training.",
