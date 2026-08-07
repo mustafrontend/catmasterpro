@@ -36,6 +36,7 @@ import { QuickActionsSheet } from './components/organisms/QuickActionsSheet';
 import { initializeRevenueCat } from './services/revenueCatService';
 import { requestAudioAndNotificationPermissions, playKittenWelcomeMeow } from './services/soundService';
 import { NotificationService } from './services/notificationService';
+import { CatApiService } from './services/catApiService';
 import { LESSONS_DATA, Lesson } from './features/training/lessonsData';
 
 export type AppPage = 'home' | 'lessons' | 'lesson-detail' | 'behavior' | 'profile' | 'mood' | 'calming';
@@ -56,6 +57,7 @@ export const App: React.FC = () => {
     initializeRevenueCat();
     fetchLessonsFromApi();
     syncWithCloudBackend();
+    CatApiService.notifyLogin(activeCat?.name);
 
     // Auto open "Add Cat" modal if user has 0 cats registered
     if (cats.length === 0) {

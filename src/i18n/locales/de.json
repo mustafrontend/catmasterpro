@@ -105,5 +105,28 @@
     "age": "Alter",
     "weight": "Gewicht",
     "language": "App-Sprache"
+  },
+  "addCatModal": {
+    "titleAdd": "Neue Katze Hinzufügen",
+    "titleEdit": "Katzenprofil Bearbeiten",
+    "subtitle": "Verwalte Profildaten und Gesundheitsdaten deiner Katze.",
+    "colorTheme": "PROFIL-FARBTHEMA",
+    "catName": "KATZENNAME *",
+    "namePlaceholder": "Z.B. Felix, Luna, Milo",
+    "nameRequired": "Katzenname darf nicht leer sein.",
+    "breed": "RASSE",
+    "ageYears": "ALTER (JAHRE)",
+    "ageMonths": "MONATE",
+    "gender": "GESCHLECHT",
+    "female": "Weiblich ♀",
+    "male": "Männlich ♂",
+    "weight": "GEWICHT (KG)",
+    "microchip": "MIKROCHIP-NUMMER (OPTIONAL)",
+    "microchipPlaceholder": "985141000000000",
+    "notes": "BESONDERE HINWEISE & ERNÄHRUNG",
+    "notesPlaceholder": "Lieblingsleckerlis, Allergien oder Verhaltensnotizen...",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "update": "Aktualisieren"
   }
 }

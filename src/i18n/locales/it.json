@@ -105,5 +105,28 @@
     "age": "Età",
     "weight": "Peso",
     "language": "Lingua App"
+  },
+  "addCatModal": {
+    "titleAdd": "Aggiungi Nuovo Gatto",
+    "titleEdit": "Modifica Profilo Gatto",
+    "subtitle": "Gestisci i dettagli del profilo e i dati sanitari del tuo gatto.",
+    "colorTheme": "TEMA COLORE PROFILO",
+    "catName": "NOME GATTO *",
+    "namePlaceholder": "Es: Romeo, Luna, Milo",
+    "nameRequired": "Il nome del gatto non può essere vuoto.",
+    "breed": "RAZZA",
+    "ageYears": "ETÀ (ANNI)",
+    "ageMonths": "MESI",
+    "gender": "SESSO",
+    "female": "Femmina ♀",
+    "male": "Maschio ♂",
+    "weight": "PESO (KG)",
+    "microchip": "NUMERO MICROCHIP (OPZIONALE)",
+    "microchipPlaceholder": "985141000000000",
+    "notes": "NOTE SPECIALI & PREFERENZE ALIMENTARI",
+    "notesPlaceholder": "Snack preferiti, allergie o note comportamentali...",
+    "cancel": "Annulla",
+    "save": "Salva",
+    "update": "Aggiorna"
   }
 }

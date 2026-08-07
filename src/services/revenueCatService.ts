@@ -1,5 +1,6 @@
 import { Capacitor } from '@capacitor/core';
 import { Purchases, LOG_LEVEL } from '@revenuecat/purchases-capacitor';
+import { CatApiService } from './catApiService';
 
 // REVENUECAT LIVE PRODUCTION API KEY FOR APP STORE
 export const REVENUECAT_API_KEY = 'appl_JYVlJKQALPEgHINrBpUgYismGUU';
@@ -65,7 +66,11 @@ export const purchaseProPackage = async (packageId: 'annual' | 'monthly' | 'life
 
       console.log('[RevenueCat] Purchasing target package:', targetPackage.identifier);
       const { customerInfo } = await Purchases.purchasePackage({ aPackage: targetPackage });
-      return customerInfo.entitlements.active[REVENUECAT_ENTITLEMENT_ID] !== undefined;
+      const isSuccess = customerInfo.entitlements.active[REVENUECAT_ENTITLEMENT_ID] !== undefined;
+      if (isSuccess) {
+        CatApiService.notifyPurchase(packageId, targetPackage.product?.priceString || 'Standard');
+      }
+      return isSuccess;
     }
 
     // 2. Fallback: Query Store Products directly from Apple App Store

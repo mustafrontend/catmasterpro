@@ -105,5 +105,28 @@
     "age": "Yaş",
     "weight": "Kilo",
     "language": "Uygulama Dili"
+  },
+  "addCatModal": {
+    "titleAdd": "Yeni Kedi Ekle",
+    "titleEdit": "Kedi Profilini Düzenle",
+    "subtitle": "Kedinizin profil bilgilerini ve sağlık verilerini yönetin.",
+    "colorTheme": "PROFİL RENK TEMASI",
+    "catName": "KEDİ İSMİ *",
+    "namePlaceholder": "Örn: Pamuk, Duman, Luna",
+    "nameRequired": "Kedi ismi boş bırakılamaz.",
+    "breed": "IRK / CİNS",
+    "ageYears": "YAŞ (YIL)",
+    "ageMonths": "AY",
+    "gender": "CİNSİYET",
+    "female": "Dişi ♀",
+    "male": "Erkek ♂",
+    "weight": "AĞIRLIK (KG)",
+    "microchip": "MİKROÇİP NUMARASI (İSTEĞE BAĞLI)",
+    "microchipPlaceholder": "985141000000000",
+    "notes": "ÖZEL NOTLAR & BESLENME TERCİHLERİ",
+    "notesPlaceholder": "Sevdiği ödül maması, alerjiler veya özel davranış notları...",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "update": "Güncelle"
   }
 }

@@ -105,5 +105,28 @@
     "age": "年齢",
     "weight": "体重",
     "language": "アプリ言語"
+  },
+  "addCatModal": {
+    "titleAdd": "新しい猫を追加",
+    "titleEdit": "猫のプロフィールを編集",
+    "subtitle": "愛猫のプロフィール詳細と健康記録を管理します。",
+    "colorTheme": "プロフィールカラーテーマ",
+    "catName": "猫の名前 *",
+    "namePlaceholder": "例: タマ, ルナ, ミロ",
+    "nameRequired": "猫の名前を入力してください。",
+    "breed": "猫種",
+    "ageYears": "年齢 (才)",
+    "ageMonths": "ヶ月",
+    "gender": "性別",
+    "female": "メス ♀",
+    "male": "オス ♂",
+    "weight": "体重 (KG)",
+    "microchip": "マイクロチップ番号 (任意)",
+    "microchipPlaceholder": "985141000000000",
+    "notes": "メモ＆フードの好み",
+    "notesPlaceholder": "好きなおやつ、アレルギー、行動メモなど...",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "update": "更新"
   }
 }

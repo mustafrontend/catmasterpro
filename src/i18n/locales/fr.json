@@ -105,5 +105,28 @@
     "age": "Âge",
     "weight": "Poids",
     "language": "Langue de l'Application"
+  },
+  "addCatModal": {
+    "titleAdd": "Ajouter un Nouveau Chat",
+    "titleEdit": "Modifier le Profil du Chat",
+    "subtitle": "Gérez les détails et le suivi médical de votre chat.",
+    "colorTheme": "THÈME DE COULEUR DU PROFIL",
+    "catName": "NOM DU CHAT *",
+    "namePlaceholder": "Ex: Minou, Luna, Milo",
+    "nameRequired": "Le nom du chat ne peut pas être vide.",
+    "breed": "RACE",
+    "ageYears": "ÂGE (ANS)",
+    "ageMonths": "MOIS",
+    "gender": "SEXE",
+    "female": "Femelle ♀",
+    "male": "Mâle ♂",
+    "weight": "POIDS (KG)",
+    "microchip": "NUMÉRO DE PUCE (OPTIONNEL)",
+    "microchipPlaceholder": "985141000000000",
+    "notes": "NOTES SPÉCIALES & PRÉFÉRENCES",
+    "notesPlaceholder": "Friandises préférées, allergies ou notes...",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "update": "Mettre à jour"
   }
 }

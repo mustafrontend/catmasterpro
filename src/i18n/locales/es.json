@@ -105,5 +105,28 @@
     "age": "Edad",
     "weight": "Peso",
     "language": "Idioma de la Aplicación"
+  },
+  "addCatModal": {
+    "titleAdd": "Añadir Nuevo Gato",
+    "titleEdit": "Editar Perfil del Gato",
+    "subtitle": "Gestiona los detalles del perfil y registros de salud de tu gato.",
+    "colorTheme": "TEMA DE COLOR DE PERFIL",
+    "catName": "NOMBRE DEL GATO *",
+    "namePlaceholder": "Ej: Pelusa, Duman, Luna",
+    "nameRequired": "El nombre del gato no puede estar vacío.",
+    "breed": "RAZA / TIPO",
+    "ageYears": "EDAD (AÑOS)",
+    "ageMonths": "MESES",
+    "gender": "GÉNERO",
+    "female": "Hembra ♀",
+    "male": "Macho ♂",
+    "weight": "PESO (KG)",
+    "microchip": "NÚMERO DE MICROCHIP (OPCIONAL)",
+    "microchipPlaceholder": "985141000000000",
+    "notes": "NOTAS ESPECIALES Y PREFERENCIAS ALIMENTARIAS",
+    "notesPlaceholder": "Premios favoritos, alergias o notas de comportamiento...",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "update": "Actualizar"
   }
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { X, Camera, Sparkles, Cat as CatIcon, Check, Heart, ShieldAlert } from 'lucide-react';
 import { Cat } from '../../types/cat';
 import { useCatStore } from '../../store/catStore';
@@ -34,6 +35,7 @@ const CAT_BREEDS = [
 ];
 
 export const AddCatModal: React.FC<AddCatModalProps> = ({ isOpen, onClose, editingCat }) => {
+  const { t } = useTranslation();
   const { addCat, updateCat } = useCatStore();
 
   const [name, setName] = useState('');
@@ -75,7 +77,7 @@ export const AddCatModal: React.FC<AddCatModalProps> = ({ isOpen, onClose, editi
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) {
-      setErrors({ name: 'Kedi ismi boş bırakılamaz.' });
+      setErrors({ name: t('addCatModal.nameRequired', 'Kedi ismi boş bırakılamaz.') });
       return;
     }
 
@@ -127,7 +129,7 @@ export const AddCatModal: React.FC<AddCatModalProps> = ({ isOpen, onClose, editi
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 15 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-lg bg-white rounded-2xl shadow-xl border-[0.5px] border-slate-200 overflow-hidden z-10 my-8"
+            className="relative w-full max-w-lg bg-white rounded-2xl shadow-xl border-[0.5px] border-slate-200 overflow-hidden z-10 my-8 font-sans"
           >
             {/* Modal Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-slate-50/50">
@@ -137,10 +139,12 @@ export const AddCatModal: React.FC<AddCatModalProps> = ({ isOpen, onClose, editi
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-slate-900 tracking-tight">
-                    {editingCat ? 'Kedi Profilini Düzenle' : 'Yeni Kedi Ekle'}
+                    {editingCat
+                      ? t('addCatModal.titleEdit', 'Kedi Profilini Düzenle')
+                      : t('addCatModal.titleAdd', 'Yeni Kedi Ekle')}
                   </h3>
                   <p className="text-xs font-normal text-slate-500">
-                    Kedinizin profil bilgilerini ve sağlık verilerini yönetin.
+                    {t('addCatModal.subtitle', 'Kedinizin profil bilgilerini ve sağlık verilerini yönetin.')}
                   </p>
                 </div>
               </div>
@@ -158,7 +162,7 @@ export const AddCatModal: React.FC<AddCatModalProps> = ({ isOpen, onClose, editi
               {/* Color & Avatar Picker */}
               <div>
                 <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
-                  Profil Renk Teması
+                  {t('addCatModal.colorTheme', 'PROFİL RENK TEMASI')}
                 </label>
                 <div className="flex items-center space-x-3">
                   {AVATAR_BG_OPTIONS.map((opt) => (
@@ -179,7 +183,7 @@ export const AddCatModal: React.FC<AddCatModalProps> = ({ isOpen, onClose, editi
               {/* Name */}
               <div>
                 <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
-                  Kedi İsmi *
+                  {t('addCatModal.catName', 'KEDİ İSMİ *')}
                 </label>
                 <input
                   type="text"
@@ -188,7 +192,7 @@ export const AddCatModal: React.FC<AddCatModalProps> = ({ isOpen, onClose, editi
                     setName(e.target.value);
                     if (errors.name) setErrors({});
                   }}
-                  placeholder="Örn: Pamuk, Duman, Luna"
+                  placeholder={t('addCatModal.namePlaceholder', 'Örn: Pamuk, Duman, Luna')}
                   className={`w-full px-3.5 py-2.5 rounded-xl border text-sm font-semibold bg-slate-50 text-slate-900 focus:outline-none focus:ring-2 transition-all ${
                     errors.name
                       ? 'border-red-300 focus:ring-red-200 bg-red-50/20'
@@ -206,7 +210,7 @@ export const AddCatModal: React.FC<AddCatModalProps> = ({ isOpen, onClose, editi
               {/* Breed */}
               <div>
                 <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
-                  Irk / Cins
+                  {t('addCatModal.breed', 'IRK / CİNS')}
                 </label>
                 <select
                   value={breed}
@@ -225,7 +229,7 @@ export const AddCatModal: React.FC<AddCatModalProps> = ({ isOpen, onClose, editi
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
-                    Yaş (Yıl)
+                    {t('addCatModal.ageYears', 'YAŞ (YIL)')}
                   </label>
                   <input
                     type="number"
@@ -238,7 +242,7 @@ export const AddCatModal: React.FC<AddCatModalProps> = ({ isOpen, onClose, editi
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
-                    Ay
+                    {t('addCatModal.ageMonths', 'AY')}
                   </label>
                   <input
                     type="number"
@@ -255,7 +259,7 @@ export const AddCatModal: React.FC<AddCatModalProps> = ({ isOpen, onClose, editi
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
-                    Cinsiyet
+                    {t('addCatModal.gender', 'CİNSİYET')}
                   </label>
                   <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200">
                     <button
@@ -265,7 +269,7 @@ export const AddCatModal: React.FC<AddCatModalProps> = ({ isOpen, onClose, editi
                         gender === 'female' ? 'bg-white text-rose-600 shadow-xs' : 'text-slate-500 hover:text-slate-800'
                       }`}
                     >
-                      Dişi ♀
+                      {t('addCatModal.female', 'Dişi ♀')}
                     </button>
                     <button
                       type="button"
@@ -274,14 +278,14 @@ export const AddCatModal: React.FC<AddCatModalProps> = ({ isOpen, onClose, editi
                         gender === 'male' ? 'bg-white text-indigo-600 shadow-xs' : 'text-slate-500 hover:text-slate-800'
                       }`}
                     >
-                      Erkek ♂
+                      {t('addCatModal.male', 'Erkek ♂')}
                     </button>
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
-                    Ağırlık (kg)
+                    {t('addCatModal.weight', 'AĞIRLIK (KG)')}
                   </label>
                   <input
                     type="number"
@@ -298,13 +302,13 @@ export const AddCatModal: React.FC<AddCatModalProps> = ({ isOpen, onClose, editi
               {/* Microchip ID */}
               <div>
                 <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
-                  Mikroçip Numarası (İsteğe Bağlı)
+                  {t('addCatModal.microchip', 'MİKROÇİP NUMARASI (İSTEĞE BAĞLI)')}
                 </label>
                 <input
                   type="text"
                   value={microchipId}
                   onChange={(e) => setMicrochipId(e.target.value)}
-                  placeholder="985141000000000"
+                  placeholder={t('addCatModal.microchipPlaceholder', '985141000000000')}
                   className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm font-medium bg-slate-50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 transition-all"
                 />
               </div>
@@ -312,13 +316,13 @@ export const AddCatModal: React.FC<AddCatModalProps> = ({ isOpen, onClose, editi
               {/* Notes */}
               <div>
                 <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
-                  Özel Notlar & Beslenme Tercihleri
+                  {t('addCatModal.notes', 'ÖZEL NOTLAR & BESLENME TERCİHLERİ')}
                 </label>
                 <textarea
                   rows={2}
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Sevdiği ödül maması, alerjiler veya özel davranış notları..."
+                  placeholder={t('addCatModal.notesPlaceholder', 'Sevdiği ödül maması, alerjiler veya özel davranış notları...')}
                   className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm font-medium bg-slate-50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 transition-all"
                 />
               </div>
@@ -330,14 +334,16 @@ export const AddCatModal: React.FC<AddCatModalProps> = ({ isOpen, onClose, editi
                   onClick={onClose}
                   className="px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 transition-colors active:scale-98"
                 >
-                  İptal
+                  {t('addCatModal.cancel', 'İptal')}
                 </button>
                 <button
                   type="submit"
                   className="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 transition-all shadow-sm active:scale-98 flex items-center gap-1.5"
                 >
                   <Sparkles className="w-4 h-4 text-amber-300" />
-                  {editingCat ? 'Güncelle' : 'Kaydet'}
+                  {editingCat
+                    ? t('addCatModal.update', 'Güncelle')
+                    : t('addCatModal.save', 'Kaydet')}
                 </button>
               </div>
             </form>

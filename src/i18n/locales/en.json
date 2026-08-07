@@ -105,5 +105,28 @@
     "age": "Age",
     "weight": "Weight",
     "language": "App Language"
+  },
+  "addCatModal": {
+    "titleAdd": "Add New Cat",
+    "titleEdit": "Edit Cat Profile",
+    "subtitle": "Manage your cat's profile details and health records.",
+    "colorTheme": "PROFILE COLOR THEME",
+    "catName": "CAT NAME *",
+    "namePlaceholder": "Ex: Fluffy, Milo, Luna",
+    "nameRequired": "Cat name cannot be empty.",
+    "breed": "BREED",
+    "ageYears": "AGE (YEARS)",
+    "ageMonths": "MONTHS",
+    "gender": "GENDER",
+    "female": "Female ♀",
+    "male": "Male ♂",
+    "weight": "WEIGHT (KG)",
+    "microchip": "MICROCHIP NUMBER (OPTIONAL)",
+    "microchipPlaceholder": "985141000000000",
+    "notes": "SPECIAL NOTES & DIETARY PREFERENCES",
+    "notesPlaceholder": "Favorite treats, allergies, or special behavior notes...",
+    "cancel": "Cancel",
+    "save": "Save Cat",
+    "update": "Update Cat"
   }
 }

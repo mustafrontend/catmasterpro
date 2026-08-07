@@ -105,5 +105,28 @@
     "age": "年龄",
     "weight": "体重",
     "language": "应用语言"
+  },
+  "addCatModal": {
+    "titleAdd": "添加新猫咪",
+    "titleEdit": "编辑猫咪档案",
+    "subtitle": "管理您的猫咪个人信息及健康档案。",
+    "colorTheme": "档案主题颜色",
+    "catName": "猫咪名字 *",
+    "namePlaceholder": "例如: 咪咪, 露娜, 麦洛",
+    "nameRequired": "猫咪名字不能为空。",
+    "breed": "品种",
+    "ageYears": "年龄 (岁)",
+    "ageMonths": "月",
+    "gender": "性别",
+    "female": "母猫 ♀",
+    "male": "公猫 ♂",
+    "weight": "体重 (KG)",
+    "microchip": "芯片编号 (可选)",
+    "microchipPlaceholder": "985141000000000",
+    "notes": "特别备注与饮食偏好",
+    "notesPlaceholder": "喜爱的零食、过敏史或行为备注...",
+    "cancel": "取消",
+    "save": "保存",
+    "update": "更新"
   }
 }

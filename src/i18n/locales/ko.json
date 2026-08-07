@@ -105,5 +105,28 @@
     "age": "나이",
     "weight": "체중",
     "language": "앱 언어"
+  },
+  "addCatModal": {
+    "titleAdd": "새 고양이 추가",
+    "titleEdit": "고양이 프로필 수정",
+    "subtitle": "반려묘의 프로필 상세 정보와 건강 기록을 관리하세요.",
+    "colorTheme": "프로필 컬러 테마",
+    "catName": "고양이 이름 *",
+    "namePlaceholder": "예: 나비, 루나, 마일로",
+    "nameRequired": "고양이 이름을 입력해 주세요.",
+    "breed": "품종",
+    "ageYears": "나이 (살)",
+    "ageMonths": "개월",
+    "gender": "성별",
+    "female": "암컷 ♀",
+    "male": "수컷 ♂",
+    "weight": "체중 (KG)",
+    "microchip": "마이크로칩 번호 (선택사항)",
+    "microchipPlaceholder": "985141000000000",
+    "notes": "특이사항 & 식습관",
+    "notesPlaceholder": "좋아하는 간식, 알레르기, 행동 메모 등...",
+    "cancel": "취소",
+    "save": "저장",
+    "update": "업데이트"
   }
 }

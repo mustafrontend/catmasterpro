@@ -110,4 +110,34 @@ export const CatApiService = {
       return [];
     }
   },
+
+  /**
+   * Notify Admin via SMTP email on app launch / user login
+   */
+  async notifyLogin(catName?: string, devicePlatform?: string): Promise<void> {
+    try {
+      await fetch(`${API_BASE_URL}/notify_login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ catName, devicePlatform: devicePlatform || 'iOS/Web' }),
+      });
+    } catch (e) {
+      console.warn('[CatApiService] Login notification email error:', e);
+    }
+  },
+
+  /**
+   * Notify Admin via SMTP email on successful in-app purchase
+   */
+  async notifyPurchase(packageId: string, price: string): Promise<void> {
+    try {
+      await fetch(`${API_BASE_URL}/notify_purchase`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ packageId, price }),
+      });
+    } catch (e) {
+      console.warn('[CatApiService] Purchase notification email error:', e);
+    }
+  },
 };
