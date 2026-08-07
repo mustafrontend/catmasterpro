@@ -203,4 +203,39 @@ Proje iOS cihazlarda çalıştırılmak ve Apple App Store'a gönderilmek üzere
 
 ---
 
+## 🤖 7. AI & Otomasyon Program Komutu (Full Context Generator Prompt)
+
+> **Kullanım Amacı:** Bu komut bloğu, herhangi bir yapay zeka modeline (ChatGPT, Claude, Gemini, Antigravity) verildiğinde uygulamanın tüm teknik mimarisini, kod yapısını, 12 dilde mağaza metinlerini ve derleme talimatlarını eksiksiz olarak tek seferde ürettirmek/özetletmek için tasarlanmıştır.
+
+```text
+[PROGRAM INSTRUCTION PROMPT FOR CATMASTER PRO]
+You are a Senior Full-Stack Architect & Mobile Product Engineer acting on the CatMaster PRO codebase.
+
+CONTEXT & ARCHITECTURE OVERVIEW:
+- Repository: https://github.com/mustafrontend/catmasterpro.git (main branch)
+- Project Path: C:\Users\mustafaozturk\Desktop\app\cat
+- Tech Stack: React 18, Strict TypeScript, Tailwind CSS, Framer Motion, Zustand, i18next (12 Languages + RTL), Capacitor 7 iOS, Python Flask VPS Backend, RevenueCat SDK.
+- Design System Rule: fullstack-kinetic-architect-v2 (Light Mode First, bg-slate-50 app background, bg-white cards, border-[0.5px] border-slate-200/80, 3D Hero depth, spring micro-interactions).
+
+CORE FEATURES & SUBSYSTEMS:
+1. First-Launch Onboarding: Step 0 Language Selector (12 flags) + 4-Step Feature Walkthrough (localStorage persistence).
+2. 3D Kinetic Hero Card: 3D perspective tilt, vertical breathing, ambient aura ring, "Prepared by Expert Vets 🩺" badge.
+3. Training Center: 8 Free & 30 PRO Lessons dynamically localized into 12 languages via getLocalizedLesson engine.
+4. Behavior & Aggression Library: Vet-approved guides for biting, scratching, litter avoidance, furniture scratching.
+5. 3-Minute Interactive Timer: Clicker audio cues, treat counter (+/-), daily streak logging.
+6. Vet Passport & Health Hub: Weight log bento bar chart, vaccine schedule, vet appointment agenda, printable PDF exporter.
+7. Local Notification Engine: 3x daily automated reminders (10:00, 15:00, 20:00) via @capacitor/local-notifications.
+8. Cat TV & Calming Audio: 10 sleep frequencies (432Hz) + 10 kitten call sounds.
+9. RevenueCat Paywall: $19.99/yr (70% OFF + 3-day trial) or $39.99 lifetime (Key: appl_JYVlJKQALPEgHINrBpUgYismGUU).
+10. VPS Backend & SMTP Mailer: Python Flask at 94.73.180.193 sending instant Gmail alerts for login and purchases.
+
+REQUIRED ACTIONS WHEN EXECUTING THIS PROMPT:
+- Verify 100% i18n key coverage across all 12 locales.
+- Run strict TypeScript check (`npx tsc --noEmit`).
+- Execute production build & Capacitor iOS sync (`npm run build && npx cap sync ios`).
+- Generate complete 12-language App Store listing texts without AI policy policy flags.
+```
+
+---
+
 > *CatMaster PRO — Mühendislik ve Tasarım Mükemmelliği.* 🚀
