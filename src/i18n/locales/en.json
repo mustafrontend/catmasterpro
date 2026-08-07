@@ -18,6 +18,14 @@
     "heroTitle": "Today's Session with {{name}}",
     "heroTitleDefault": "Today's Session with Your Cat",
     "heroSubtitle": "Manage your cat's training and health with 3-minute positive reinforcement sessions.",
+    "liveSessionReady": "Live Session Ready",
+    "positiveReinforcement": "Positive Reinforcement",
+    "idealSessionDuration": "3 Minutes",
+    "idealSessionLabel": "Ideal Session",
+    "rewardBased": "94% Success",
+    "rewardBasedLabel": "Reward Based",
+    "stepByStep": "8 Lessons",
+    "stepByStepLabel": "Step-by-Step",
     "startSessionBtn": "Start 3-Min Session Now ⏱️",
     "quickLessons": "Lessons",
     "quickBehavior": "Behavior",
@@ -145,5 +153,23 @@
     "moodSubtitle": "Detect cat mood using AI technology",
     "calmingTitle": "Calming Cat Music",
     "calmingSubtitle": "Anti-stress relaxing sounds and melodies"
+  },
+  "onboarding": {
+    "skip": "Skip",
+    "prev": "Back",
+    "next": "Next",
+    "startNowBtn": "Awesome! Let's Start 🚀",
+    "step1Title": "Welcome to CatMaster PRO",
+    "step1Sub": "Train your cat with 3-minute positive reinforcement sessions and scientific clicker training.",
+    "step1Highlight": "🎓 8 Step-by-Step Training Lessons",
+    "step2Title": "Aggression & Behavior Solutions",
+    "step2Sub": "Veterinary guides for biting, scratching, litter box issues, and night zoomies.",
+    "step2Highlight": "🛡️ Behavior & Aggression Library",
+    "step3Title": "Health Records & Vaccine Tracker",
+    "step3Sub": "Track weight charts, vaccine schedules, and vet appointments with automatic mobile reminders.",
+    "step3Highlight": "💉 Smart Mobile Notifications",
+    "step4Title": "AI Mood & Calming Sounds",
+    "step4Sub": "Analyze cat meows with AI and soothe your cat with anti-stress relaxing melodies.",
+    "step4Highlight": "🧠 AI Mood & Calming Sounds"
   }
 }

@@ -118,7 +118,7 @@ export const HomePageView: React.FC<HomePageViewProps> = ({
               className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800 border border-emerald-200"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
-              <span>Canlı Seans Hazır</span>
+              <span>{t('home.liveSessionReady', 'Canlı Seans Hazır')}</span>
             </motion.div>
           </div>
 
@@ -166,25 +166,25 @@ export const HomePageView: React.FC<HomePageViewProps> = ({
             <div className="bg-white/80 p-2.5 rounded-xl border border-amber-100 text-center shadow-2xs">
               <div className="flex items-center justify-center gap-1 text-[11px] font-extrabold text-[#97480d]">
                 <Clock className="w-3.5 h-3.5 text-amber-600" />
-                <span>3 Dakika</span>
+                <span>{t('home.idealSessionDuration', '3 Dakika')}</span>
               </div>
-              <span className="text-[9px] text-slate-500 font-semibold block mt-0.5">İdeal Seans</span>
+              <span className="text-[9px] text-slate-500 font-semibold block mt-0.5">{t('home.idealSessionLabel', 'İdeal Seans')}</span>
             </div>
 
             <div className="bg-white/80 p-2.5 rounded-xl border border-amber-100 text-center shadow-2xs">
               <div className="flex items-center justify-center gap-1 text-[11px] font-extrabold text-[#97480d]">
                 <Award className="w-3.5 h-3.5 text-amber-600" />
-                <span>%94 Başarı</span>
+                <span>{t('home.rewardBased', '%94 Başarı')}</span>
               </div>
-              <span className="text-[9px] text-slate-500 font-semibold block mt-0.5">Ödül Odaklı</span>
+              <span className="text-[9px] text-slate-500 font-semibold block mt-0.5">{t('home.rewardBasedLabel', 'Ödül Odaklı')}</span>
             </div>
 
             <div className="bg-white/80 p-2.5 rounded-xl border border-amber-100 text-center shadow-2xs">
               <div className="flex items-center justify-center gap-1 text-[11px] font-extrabold text-[#97480d]">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                <span>8 Ders</span>
+                <span>{t('home.stepByStep', '8 Ders')}</span>
               </div>
-              <span className="text-[9px] text-slate-500 font-semibold block mt-0.5">Adım Adım</span>
+              <span className="text-[9px] text-slate-500 font-semibold block mt-0.5">{t('home.stepByStepLabel', 'Adım Adım')}</span>
             </div>
           </div>
 

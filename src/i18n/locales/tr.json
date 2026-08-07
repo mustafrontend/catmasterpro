@@ -18,6 +18,14 @@
     "heroTitle": "{{name}} ile Bugünkü Seans",
     "heroTitleDefault": "Kedinizle Bugünkü Seans",
     "heroSubtitle": "3 dakikalık pozitif pekiştirme seansları ile kedinizin eğitimini ve sağlığını yönetin.",
+    "liveSessionReady": "Canlı Seans Hazır",
+    "positiveReinforcement": "Pozitif Pekiştirme",
+    "idealSessionDuration": "3 Dakika",
+    "idealSessionLabel": "İdeal Seans",
+    "rewardBased": "%94 Başarı",
+    "rewardBasedLabel": "Ödül Odaklı",
+    "stepByStep": "8 Ders",
+    "stepByStepLabel": "Adım Adım",
     "startSessionBtn": "Şimdi 3 Dk Seans Başlat ⏱️",
     "quickLessons": "Dersler",
     "quickBehavior": "Davranış",
@@ -145,5 +153,23 @@
     "moodSubtitle": "Yapay zeka ile kedi ruh hali tespiti",
     "calmingTitle": "Sakinleştirici Kedi Müzikleri",
     "calmingSubtitle": "Stres önleyici rahatlatıcı sesler ve müzik"
+  },
+  "onboarding": {
+    "skip": "Atla",
+    "prev": "Geri",
+    "next": "Devam Et",
+    "startNowBtn": "Harika! Başlayalım 🚀",
+    "step1Title": "CatMaster PRO'ya Hoş Geldiniz",
+    "step1Sub": "3 dakikalık bilimsel pozitif pekiştirme ve clicker metodu ile kedinizin zeka ve komut eğitimini tamamlayın.",
+    "step1Highlight": "🎓 8 Adım Adım Eğitim Dersi",
+    "step2Title": "Agresyon & Davranış Çözümleri",
+    "step2Sub": "Isırma, tırmalama, kum kabı reddi ve gece koşturması gibi zorlu davranışlar için veteriner onaylı kılavuzlar.",
+    "step2Highlight": "🛡️ Davranış & Agresyon Kütüphanesi",
+    "step3Title": "Sağlık Karnesi & Aşı Takvimi",
+    "step3Sub": "Kedinizin kilo değişimini grafiklerle izleyin, aşı günlerini ve veteriner randevularını bildirimlerle hatırlayın.",
+    "step3Highlight": "💉 Akıllı Mobil Bildirim Motoru",
+    "step4Title": "AI Mood & Rahatlatıcı Müzikler",
+    "step4Sub": "Yapay zeka miyavlama analizörü ile kedi ruh halini tespit edin, anti-stres müzikleri ile kedinizi sakinleştirin.",
+    "step4Highlight": "🧠 Yapay Zeka & Rahatlatıcı Sesler"
   }
 }

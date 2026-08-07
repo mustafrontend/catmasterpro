@@ -33,6 +33,7 @@ import { LessonDetailView } from './features/training/LessonDetailView';
 import { SessionTimerView } from './features/timer/SessionTimerView';
 import { PaywallModal } from './features/paywall/PaywallModal';
 import { QuickActionsSheet } from './components/organisms/QuickActionsSheet';
+import { OnboardingWalkthroughModal } from './components/organisms/OnboardingWalkthroughModal';
 import { initializeRevenueCat } from './services/revenueCatService';
 import { requestAudioAndNotificationPermissions, playKittenWelcomeMeow } from './services/soundService';
 import { NotificationService } from './services/notificationService';
@@ -51,6 +52,17 @@ export const App: React.FC = () => {
   const [isPaywallOpen, setIsPaywallOpen] = useState(false);
   const [isAddCatModalOpen, setIsAddCatModalOpen] = useState(false);
   const [isQuickActionsOpen, setIsQuickActionsOpen] = useState(false);
+  const [isOnboardingOpen, setIsOnboardingOpen] = useState(() => {
+    return localStorage.getItem('catmaster_onboarding_completed') !== 'true';
+  });
+
+  const handleCompleteOnboarding = () => {
+    localStorage.setItem('catmaster_onboarding_completed', 'true');
+    setIsOnboardingOpen(false);
+    if (cats.length === 0) {
+      setIsAddCatModalOpen(true);
+    }
+  };
 
   // Sync VPS backend, lessons, initialize RevenueCat, request sound permissions, and check if initial cat creation is needed
   useEffect(() => {
@@ -59,8 +71,8 @@ export const App: React.FC = () => {
     syncWithCloudBackend();
     CatApiService.notifyLogin(activeCat?.name);
 
-    // Auto open "Add Cat" modal if user has 0 cats registered
-    if (cats.length === 0) {
+    // Auto open "Add Cat" modal if user has 0 cats registered and onboarding is already finished
+    if (cats.length === 0 && localStorage.getItem('catmaster_onboarding_completed') === 'true') {
       setIsAddCatModalOpen(true);
     }
 
@@ -320,6 +332,12 @@ export const App: React.FC = () => {
       <PaywallModal
         isOpen={isPaywallOpen}
         onClose={() => setIsPaywallOpen(false)}
+      />
+
+      {/* First-Launch Onboarding Walkthrough Tour */}
+      <OnboardingWalkthroughModal
+        isOpen={isOnboardingOpen}
+        onComplete={handleCompleteOnboarding}
       />
     </div>
   );
