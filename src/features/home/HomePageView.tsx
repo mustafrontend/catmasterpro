@@ -18,7 +18,9 @@ import {
   Bell,
   Clock,
   ChevronRight,
-  ShieldCheck
+  ShieldCheck,
+  Award,
+  CheckCircle2,
 } from 'lucide-react';
 import { useCatStore } from '../../store/catStore';
 import { LESSONS_DATA, Lesson } from '../training/lessonsData';
@@ -44,7 +46,6 @@ export const HomePageView: React.FC<HomePageViewProps> = ({
 
   return (
     <div className="space-y-5 pb-8 animate-fade-in font-sans max-w-xl mx-auto">
-      
       {/* Top Bar / Header Section matching design */}
       <div className="flex items-center justify-between pt-1">
         <div>
@@ -78,49 +79,142 @@ export const HomePageView: React.FC<HomePageViewProps> = ({
         </div>
       </div>
 
-      {/* 3D Soft Pedestal Hero Banner (Today's Session) */}
+      {/* Dynamic Animated Kinetic Hero Banner */}
       <motion.div
-        whileHover={{ y: -2 }}
-        className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200/70 relative overflow-hidden flex flex-col justify-between"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="bg-gradient-to-b from-white via-amber-50/20 to-orange-50/30 rounded-3xl p-5 sm:p-6 shadow-sm border border-slate-200/80 relative overflow-hidden flex flex-col justify-between"
       >
-        {/* Soft Warm Glow Background */}
-        <div className="absolute -right-10 -bottom-10 w-48 h-48 bg-amber-100/60 rounded-full blur-3xl pointer-events-none" />
+        {/* Animated Radial Pulse Glow Background */}
+        <motion.div
+          animate={{
+            scale: [1, 1.15, 1],
+            opacity: [0.3, 0.6, 0.3],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute -right-12 -top-12 w-56 h-56 bg-gradient-to-br from-amber-300/40 to-orange-400/30 rounded-full blur-3xl pointer-events-none"
+        />
 
-        <div className="space-y-3 relative z-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black bg-amber-100/80 text-[#97480d]">
-            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-            <span>{t('home.positiveReinforcement', 'Pozitif Pekiştirme')}</span>
+        <div className="space-y-4 relative z-10">
+          {/* Header Floating Badges */}
+          <div className="flex items-center justify-between flex-wrap gap-2">
+            <motion.div
+              animate={{ y: [-2, 2, -2] }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black bg-amber-100/90 text-[#97480d] border border-amber-200/60 shadow-2xs"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-amber-600 animate-spin-slow" />
+              <span>{t('home.positiveReinforcement', 'Pozitif Pekiştirme')}</span>
+            </motion.div>
+
+            <motion.div
+              animate={{ scale: [1, 1.04, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-emerald-100 text-emerald-800 border border-emerald-200"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+              <span>Canlı Seans Hazır</span>
+            </motion.div>
           </div>
 
-          <h2 className="text-2xl font-black text-slate-900 tracking-tight font-serif">
-            {activeCat
-              ? t('home.heroTitle', { name: activeCat.name })
-              : t('home.heroTitleDefault')}
-          </h2>
+          {/* Dynamic Animated Title & Subtitle */}
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-serif">
+              {activeCat
+                ? t('home.heroTitle', { name: activeCat.name })
+                : t('home.heroTitleDefault')}
+            </h2>
+            <p className="text-xs text-slate-600 font-medium leading-relaxed max-w-sm mt-1">
+              {t('home.heroSubtitle')}
+            </p>
+          </div>
 
-          <p className="text-xs text-slate-500 font-medium leading-relaxed max-w-sm">
-            {t('home.heroSubtitle')}
-          </p>
+          {/* 3D Cat Display with Animated Floating Particles & Pulse Rings */}
+          <div className="my-1 relative flex items-center justify-center">
+            {/* Outer Pulsing Aura Ring */}
+            <motion.div
+              animate={{ scale: [1, 1.03, 1], opacity: [0.4, 0.8, 0.4] }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute inset-0 rounded-2xl bg-gradient-to-r from-amber-400/20 via-orange-300/30 to-amber-500/20 blur-md pointer-events-none"
+            />
 
-          {/* 3D Cat & Brain Spheres Illustration Display */}
-          <div className="my-2 relative flex items-center justify-center py-2">
-            <div className="w-full h-36 rounded-2xl bg-gradient-to-b from-amber-50/50 to-orange-100/40 border border-amber-100 flex items-center justify-center overflow-hidden relative shadow-inner">
+            <div className="w-full h-40 sm:h-44 rounded-2xl bg-slate-950 border border-amber-200/60 overflow-hidden relative shadow-md group cursor-pointer" onClick={onOpenTimer}>
               <img
                 src="/assets/cat_3d_hero.jpg"
                 alt="3D Cat Training"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
+
+              {/* Floating Animated Particle Badges over 3D Image */}
+              <motion.div
+                animate={{ y: [-5, 5, -5], rotate: [-4, 4, -4] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-xl shadow-md border border-white/50 flex items-center gap-1.5 text-[10px] font-black text-[#97480d]"
+              >
+                <span>🧠</span>
+                <span>Zeka Eğitimi</span>
+              </motion.div>
+
+              <motion.div
+                animate={{ y: [4, -4, 4], rotate: [3, -3, 3] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute bottom-3 right-3 bg-slate-900/85 backdrop-blur-md px-2.5 py-1 rounded-xl shadow-md border border-white/20 flex items-center gap-1.5 text-[10px] font-black text-amber-300"
+              >
+                <span>🐾</span>
+                <span>Clicker Uyumlu</span>
+              </motion.div>
             </div>
           </div>
 
+          {/* Quick Animated Stat Pills Row */}
+          <div className="grid grid-cols-3 gap-2 pt-1">
+            <div className="bg-white/80 p-2.5 rounded-xl border border-amber-100 text-center shadow-2xs">
+              <div className="flex items-center justify-center gap-1 text-[11px] font-extrabold text-[#97480d]">
+                <Clock className="w-3.5 h-3.5 text-amber-600" />
+                <span>3 Dakika</span>
+              </div>
+              <span className="text-[9px] text-slate-500 font-semibold block mt-0.5">İdeal Seans</span>
+            </div>
+
+            <div className="bg-white/80 p-2.5 rounded-xl border border-amber-100 text-center shadow-2xs">
+              <div className="flex items-center justify-center gap-1 text-[11px] font-extrabold text-[#97480d]">
+                <Award className="w-3.5 h-3.5 text-amber-600" />
+                <span>%94 Başarı</span>
+              </div>
+              <span className="text-[9px] text-slate-500 font-semibold block mt-0.5">Ödül Odaklı</span>
+            </div>
+
+            <div className="bg-white/80 p-2.5 rounded-xl border border-amber-100 text-center shadow-2xs">
+              <div className="flex items-center justify-center gap-1 text-[11px] font-extrabold text-[#97480d]">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                <span>8 Ders</span>
+              </div>
+              <span className="text-[9px] text-slate-500 font-semibold block mt-0.5">Adım Adım</span>
+            </div>
+          </div>
+
+          {/* Glowing Animated CTA Button */}
           <div className="pt-1">
-            <button
+            <motion.button
+              whileTap={{ scale: 0.97 }}
               onClick={onOpenTimer}
-              className="w-full py-3.5 bg-[#97480d] hover:bg-[#7a3600] text-white font-black text-xs sm:text-sm rounded-2xl shadow-md transition-all flex items-center justify-center gap-2 active:scale-98"
+              className="w-full py-4 bg-gradient-to-r from-[#97480d] via-[#b65813] to-[#fd9859] hover:from-[#7a3600] hover:to-[#e57d3c] text-white font-black text-xs sm:text-sm rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 relative overflow-hidden group"
             >
-              <Play className="w-4 h-4 fill-white text-white" />
+              {/* Button Shimmer Effect */}
+              <motion.div
+                animate={{ x: ['-100%', '200%'] }}
+                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-white/25 to-transparent skew-x-12 pointer-events-none"
+              />
+              
+              <Play className="w-4 h-4 fill-white text-white group-hover:scale-110 transition-transform" />
               <span>{t('home.startSessionBtn')}</span>
-            </button>
+            </motion.button>
           </div>
         </div>
       </motion.div>
