@@ -150,6 +150,84 @@ export class NotificationService {
     return notificationId;
   }
 
+  // Schedule 3 daily training notifications (10:00, 15:00, 20:00)
+  public static async setupDailyTrainingNotifications(catName: string = 'Kediniz'): Promise<void> {
+    try {
+      const isGranted = await this.requestPermission();
+      if (!isGranted) return;
+
+      const dailyTimes = [
+        {
+          id: 9001,
+          hour: 10,
+          minute: 0,
+          title: `🐾 Sabah Eğitimi Zamanı!`,
+          body: `${catName} ile 3 dakikalık pozitif pekiştirme seansına hazır mısın?`,
+        },
+        {
+          id: 9002,
+          hour: 15,
+          minute: 0,
+          title: `🎯 Eğitime Hazır Mısın?`,
+          body: `Bugün 3 dakikalık 1 seans yaparak seri (streak) rekorunu koru!`,
+        },
+        {
+          id: 9003,
+          hour: 20,
+          minute: 0,
+          title: `🌙 Akşam Ödül Seansı!`,
+          body: `Günün stresini atmak için ${catName} ile hızlı bir clicker seansı yap.`,
+        },
+      ];
+
+      for (const item of dailyTimes) {
+        const targetDate = new Date();
+        targetDate.setHours(item.hour, item.minute, 0, 0);
+
+        if (targetDate.getTime() < Date.now()) {
+          targetDate.setDate(targetDate.getDate() + 1);
+        }
+
+        await this.scheduleNotification({
+          id: item.id,
+          title: item.title,
+          body: item.body,
+          scheduleAt: targetDate,
+          extraData: { type: 'daily_training', catName },
+        });
+      }
+      console.log('[NotificationService] Scheduled 3 daily training reminders (10:00, 15:00, 20:00)');
+    } catch (err) {
+      console.warn('[NotificationService] Error setting up daily training notifications:', err);
+    }
+  }
+
+  // Schedule Vaccine Reminder (1 day prior)
+  public static async scheduleVaccineReminder(
+    vaccineId: string,
+    catName: string,
+    vaccineName: string,
+    dueDateStr: string
+  ): Promise<number> {
+    const notificationId = Math.floor(Math.abs(this.hashCode(`vac_${vaccineId}`)) % 100000);
+    const dueDate = new Date(`${dueDateStr}T09:00:00`);
+    
+    // 1 day before vaccine
+    const reminderTime = new Date(dueDate.getTime() - 24 * 60 * 60 * 1000);
+
+    if (reminderTime.getTime() > Date.now()) {
+      await this.scheduleNotification({
+        id: notificationId,
+        title: `💉 Aşı Zamanı Yaklaştı: ${catName}`,
+        body: `Yarın ${catName} için ${vaccineName} aşısı zamanı. Sağlık karnesini unutmayın!`,
+        scheduleAt: reminderTime,
+        extraData: { vaccineId, catName },
+      });
+    }
+
+    return notificationId;
+  }
+
   private static hashCode(str: string): number {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {

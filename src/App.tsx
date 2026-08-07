@@ -35,6 +35,7 @@ import { PaywallModal } from './features/paywall/PaywallModal';
 import { QuickActionsSheet } from './components/organisms/QuickActionsSheet';
 import { initializeRevenueCat } from './services/revenueCatService';
 import { requestAudioAndNotificationPermissions, playKittenWelcomeMeow } from './services/soundService';
+import { NotificationService } from './services/notificationService';
 import { LESSONS_DATA, Lesson } from './features/training/lessonsData';
 
 export type AppPage = 'home' | 'lessons' | 'lesson-detail' | 'behavior' | 'profile' | 'mood' | 'calming';
@@ -61,9 +62,10 @@ export const App: React.FC = () => {
       setIsAddCatModalOpen(true);
     }
 
-    // Request permissions & unlock iOS Audio Context
+    // Request permissions & unlock iOS Audio Context + Schedule 3x Daily Training Notifications
     requestAudioAndNotificationPermissions().then(() => {
       playKittenWelcomeMeow();
+      NotificationService.setupDailyTrainingNotifications(activeCat?.name);
     });
 
     // Fallback on first touch/click for iOS autoplay policy
