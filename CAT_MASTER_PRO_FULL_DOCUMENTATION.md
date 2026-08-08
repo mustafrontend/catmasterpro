@@ -233,8 +233,28 @@ REQUIRED ACTIONS WHEN EXECUTING THIS PROMPT:
 - Verify 100% i18n key coverage across all 12 locales.
 - Run strict TypeScript check (`npx tsc --noEmit`).
 - Execute production build & Capacitor iOS sync (`npm run build && npx cap sync ios`).
-- Generate complete 12-language App Store listing texts without AI policy policy flags.
+- Deploy Next.js Privacy Policy page on Vercel at https://www.sosyalvideoolustur.com.tr/privacy.
+- Generate complete 12-language App Store listing texts without AI policy flags.
 ```
+
+---
+
+## 🌐 8. Web Privacy Policy & App Store Privacy Declarations
+
+### 1️⃣ **Canlı Next.js Gizlilik Politikası Rotaları (Web & Vercel)**:
+- **Canlı Web URL:** `https://www.sosyalvideoolustur.com.tr/privacy`
+- **Dosya Konumu:** `C:\Users\mustafaozturk\Desktop\Projects\necoai\frontend\src\app\privacy\page.tsx`
+- **Barındırma:** Vercel (Next.js App Router UI)
+- **Özellikler:** 12 dilde dinamik sekme seçici, Apple StoreKit ve RevenueCat veri politikası açıklamaları, kişisel veri silme ve GDPR hakları.
+
+### 2️⃣ **App Store Connect — App Privacy (Veri Beyanı) Yapılandırması**:
+- **Do you collect data?** -> `Yes, we collect data from this app`
+- **Seçilen Veri Tipleri**:
+  - `Purchases` -> `Purchase History` (Amaç: `App Functionality` | Kimlikle Eşleşme: `No` | Takip: `No`)
+  - `Identifiers` -> `User ID` (Amaç: `App Functionality` | Kimlikle Eşleşme: `No` | Takip: `No`)
+- **App Store ASO Anahtar Kelimeler (100 Karakter Sınırı - Kopyalamaya Hazır)**:
+  `kedi eğitimi,kedi sesi,kedi oyunu,miyav,veteriner,yavru kedi,kedi miyavlaması,kum kabı,kedi bakımı`
+- **Çözülen Hata**: App Store Connect üzerindeki tüm dillerin (Fransızca, Almanca, İtalyanca vb.) Privacy Policy URL alanına `https://www.sosyalvideoolustur.com.tr/privacy` eklenerek kırmızı onay engeli kaldırılmıştır.
 
 ---
 
